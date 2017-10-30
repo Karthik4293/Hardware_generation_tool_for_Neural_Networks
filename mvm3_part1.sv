@@ -19,30 +19,32 @@ module mvm3_part1 (clk, reset, s_valid, m_ready, data_in, m_valid, s_ready, data
              data_out <= 0;
        end
 
-       datapath d(clk, clear_acc, reset, data_in, addr_x, wr_en_x, addr_a, wr_en_a, data_out, addr_y, wr_en_y, addr_z, wr_en_z, overflow);
-       control  c(clk, s_valid, s_ready, m_ready, m_valid, reset, addr_x, wr_en_x, addr_a, wr_en_a, done, clear_acc, addr_y, wr_en_y, addr_z, wr_en_z);
+       datapath d(clk, clear_acc, reset, data_in, addr_x, wr_en_x, addr_a, wr_en_a, data_out, addr_y, wr_en_y, addr_z, wr_en_z, overflow, valid_in, valid_out);
+       control  c(clk, s_valid, s_ready, m_ready, m_valid, reset, addr_x, wr_en_x, addr_a, wr_en_a, done, clear_acc, addr_y, wr_en_y, addr_z, wr_en_z, valid_in, valid_out);
 
 endmodule
 //-----------------------------------------------------------------------------
 
 //Control module
 
-module control(clk, s_valid, s_ready, m_ready, m_valid, reset, addr_x, wr_en_x, addr_a, wr_en_a, done, clear_acc, addr_y, wr_en_y, addr_z, wr_en_z);
+module control(clk, s_valid, s_ready, m_ready, m_valid, reset, addr_x, wr_en_x, addr_a, wr_en_a, done, clear_acc, addr_y, wr_en_y, addr_z, wr_en_z, valid_in, valid_out);
 
-       input clk, s_valid, reset, m_ready;
+       input clk, s_valid, reset, m_ready, valid_out;
        output logic [3:0] addr_a;
 	     output logic [1:0] addr_x, addr_y, addr_z;
-       output logic done, wr_en_x, wr_en_a, clear_acc, wr_en_y, wr_en_z,m_valid, s_ready;
+       output logic done, wr_en_x, wr_en_a, clear_acc, wr_en_y, wr_en_z,m_valid, s_ready, valid_in;
        logic write_done_x, write_done_a, mac_done, write_done_y, write_done_z;
 	     logic [2:0] state, next_state;
 	     logic [1:0] multiplier, counter;
 
 
 
+
+
        always_ff @(posedge clk) begin
 
               if (reset == 1)
-                   state<=0;
+                   state<=1;
               else
                    state<=next_state;
        end
@@ -51,110 +53,90 @@ module control(clk, s_valid, s_ready, m_ready, m_valid, reset, addr_x, wr_en_x, 
 
           case (state)               // State explainations
 
-            0 : if (s_valid == 1)               // State 0 checks valid input
+/*            0 : if ((s_valid == 1) && (s_ready == 1))               // State 0 checks valid input
                    next_state = 1;
                 else
                    next_state = 0;
-
-            1 : if (s_ready == 1)               // State 1 asserts s_ready
+*/
+            1 : if (write_done_a == 1)          // State 2 starts writing into the memory and checks if write is done
                     next_state = 2;
                 else
                     next_state = 1;
 
-            2 : if (write_done_a == 1)          // State 2 starts writing into the memory and checks if write is done
+            2 : if (write_done_x == 1)          // State 3 -- same as above
                     next_state = 3;
                 else
                     next_state = 2;
 
-            3 : if (write_done_x == 1)          // State 3 -- same as above
+            3 : if (mac_done == 1)              // State 4 starts MAC and respond if completed(values are stored in state 4)
                     next_state = 4;
                 else
                     next_state = 3;
 
-            4 : if (mac_done == 1)              // State 4 starts MAC and respond if completed(values are stored in state 4)
-                    next_state = 5;
+            4 : if (done)              // State 5 put the output into a different memory
+                    next_state = 1;
                 else
                     next_state = 4;
-
-            5 : if (done)              // State 5 put the output into a different memory
-                    next_state = 0;
-                else
-                    next_state = 5;
           endcase
        end
 
-       assign wr_en_a = (state == 2);
-       assign wr_en_x = (state == 3);
-       assign wr_en_y = (state == 4);
-       assign m_valid = (addr_y>=0)&(addr_y<=2);
+     // writing to memory
+       assign wr_en_a = (state == 1)&(s_valid)&(s_ready);
+       assign wr_en_x = (state == 2);
+       assign wr_en_y = (state == 3) & (counter == 2);
 
-    //   assign display_done = ((state==5)&(addr_y==2)&(entry==1));
+     // valid signals
+       assign m_valid = ((addr_y >=0 ) & (addr_y <=2 ) & (valid_out == 1));
+       assign valid_in = (state == 3);
+       assign s_ready = ((addr_a<=8)&&(addr_x<=2));
+       assign clear_acc = (write_done_x == 1) | (mac_done == 1) | (counter == 1);
 
-
-
-       assign write_done_x = ((state==3)&(addr_x==2));
-       assign write_done_a = ((state==2)&(addr_a==8));
-       assign write_done_y = ((state==4)&(addr_y==2));
-       assign write_done_z = ((state==5)&(addr_z==2));
-
-      always_ff @(posedge clk) begin
-           if ((addr_a<=8)&&(addr_x<=2))
-              s_ready <= 1;
-           else
-              s_ready <= 0;
-      end
+    //  writing is done
+       assign write_done_a = ((state==1) && (addr_a == 9 ));
+       assign write_done_x = ((state==2) && (addr_x == 2));
+       assign write_done_y = ((state==3) && (addr_y==2));
+       assign write_done_z = ((state==4) && (addr_z==2));
 
 
       always_ff @(posedge clk) begin
 
-            if (state == 0) begin
-               multiplier <= 0;
-               mac_done <= 0;
-               counter <= 0;
-            end
-
-           else if (state == 1) begin
-               addr_a <= 0;
-               addr_x <= 0;
-               addr_y <= 0;
+           if (state == 1) begin
+                    multiplier <= 0;
+                    mac_done <= 0;
+                    counter <= 0;
+                    addr_a <= 0;
+                    addr_x <= 0;
+                    addr_y <= 0;
+                 if ((write_done_a == 0) && (s_ready))
+                     addr_a <= addr_a + 1;
             end
 
             else if (state == 2) begin
-                 if ((write_done_a == 0) && (addr_a<=8))
-                     addr_a <= addr_a + 1;
-                 else
-                     addr_a <= 0;
+                 if ((write_done_x == 0) && (s_ready))
+                     addr_x <= addr_x + 1;
             end
 
             else if (state == 3) begin
-                 if ((write_done_x == 0) && (addr_x<=2))
-                    addr_x <= addr_x + 1;
-                 else
-                    addr_x <= 0;
-            end
-
-            else if (state == 4) begin
-                 if (multiplier<=2) begin
-                     if (counter<=2) begin
+                 if (multiplier < 3)  begin
+                     if (counter < 3) begin
+                        addr_a <= ((3 * multiplier) + counter);
                         addr_x <= counter;
-                        addr_a <= (3 * multiplier) + counter;
-                        counter <= counter + 1;
+                        counter <= (counter + 1);
                      end
                      else  begin
                             addr_y <= multiplier;
                             multiplier <= multiplier + 1;
                             counter <= 0;
-                            clear_acc <= 1;
                      end
                  end
                  else begin
                      mac_done <= 1;
                      addr_y <= 0;
-                     clear_acc <= 1;
                  end
             end
+            slakndsl
 
-            else if (state == 5) begin
+            else if (state == 4) begin
                   if (m_valid & m_ready & (addr_y<=2)) begin
                       wr_en_z <= 1;
                       addr_y <= addr_z;
@@ -164,27 +146,28 @@ module control(clk, s_valid, s_ready, m_ready, m_valid, reset, addr_x, wr_en_x, 
                       done <= 1;
             end
       end
+
 endmodule
 //-----------------------------------------------------------------------------
 
 // Datapath module
 
-module datapath(clk, clear_acc, reset, data_in, addr_x, wr_en_x, addr_a, wr_en_a, data_out, addr_y, wr_en_y, addr_z, wr_en_z, overflow);
+module datapath(clk, clear_acc, reset, data_in, addr_x, wr_en_x, addr_a, wr_en_a, data_out, addr_y, wr_en_y, addr_z, wr_en_z, overflow, valid_in, valid_out);
 
   input clk, reset, clear_acc;
-  input wr_en_x,wr_en_a,wr_en_z, wr_en_y;
+  input wr_en_x,wr_en_a,wr_en_z, wr_en_y, valid_in;
   input signed [7:0]data_in;
   input logic [3:0]addr_a;
   input logic [1:0] addr_x,addr_z, addr_y;
   output logic signed [15:0]data_out;
-  output logic overflow;
+  output logic overflow, valid_out;
 
   logic [15:0]f, data_out_temp;
   logic signed [7:0] data_out_x, data_out_a;
 
   memory #(8,3,2) x(clk, data_in, data_out_x, addr_x, wr_en_x);
   memory #(8,9,4) a(clk, data_in, data_out_a, addr_a, wr_en_a);
-  part2_mac m(clk, clear_acc, data_out_a, data_out_x, f, overflow);
+  part2_mac m(clk, clear_acc, data_out_a, data_out_x, f, valid_in, valid_out, overflow);
   memory #(16,3,2) y(clk, f, data_out_temp, addr_y, wr_en_y);
   memory #(16,3,2) z(clk, data_out_temp, data_out, addr_z, wr_en_z);
 
@@ -211,38 +194,65 @@ endmodule
 
 // MAC module
 
-module part2_mac(clk, clear_acc, a, b, f, overflow);
-        input clk, clear_acc;
+module part2_mac(clk, clear_acc, a, b, f, valid_in, valid_out, overflow);
+        input clk, clear_acc, valid_in;
         input signed [7:0] a, b;
         output logic signed [15:0] f;
-        output logic  overflow;
-
+        output logic valid_out, overflow;
 
         //internal logic
 
         logic signed [7:0] ip1, ip2;
         logic signed [15:0] out,mul,add;
-        logic overflow_int;
+        logic enable_f, enable_ab, overflow_int;
 
 
 // Conditions on reset
         always_ff @(posedge clk) begin
-            if (clear_acc == 1) begin
-                  f <=0;
-                  overflow <= 0;
-            end
-            else  begin
-                  f<=add;
-                  overflow <= overflow_int;
-            end
+
+              if (clear_acc == 1 ) begin
+                        ip1 <= 0;
+                        ip2 <= 0;
+                        f <= 0 ;
+                        overflow <= 0 ;
+              end
+              else  begin
+                  if (enable_ab) begin
+                        ip1 <= a;
+                        ip2 <= b;
+                  end
+                  if (enable_f) begin
+                        f <= add;
+                        overflow <= overflow_int;
+                  end
+              end
         end
+
+//MAC calculation
+
+       assign enable_ab = valid_in;
 
         always_comb  begin
                 mul = ip1 * ip2;
                 add  = mul + f;
         end
 
+//Assigning enable_f and determining valid_out
+
+        always_ff @(posedge clk)begin
+
+               if(clear_acc == 1)begin
+                  valid_out = 0 ;
+               end
+
+               else begin
+                  enable_f <= enable_ab;
+                  valid_out <= enable_f ;
+               end
+        end
+
 //Overflow Detector
+
         always_ff @(posedge clk)begin
 
                if(overflow)
@@ -254,6 +264,9 @@ module part2_mac(clk, clear_acc, a, b, f, overflow);
                else
                     overflow_int =0;
         end
+
+
+
 endmodule
 
 //------------------------------------------------------------------------------
@@ -280,7 +293,7 @@ module check_timing();
          std::randomize(rb, rb2); // randomize rb
       end
 
-      logic [7:0] invals[0:11] = '{1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3};
+      logic [7:0] invals[0:11] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3};
 
       logic [15:0] j;
 
