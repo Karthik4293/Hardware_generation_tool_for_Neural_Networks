@@ -11,26 +11,26 @@ module mvm3_part1 (clk, reset, s_valid, m_ready, data_in, m_valid, s_ready, data
        output logic signed [15:0] data_out;
 
        logic [3:0] addr_a;
-	     logic [1:0] addr_x, addr_y;
-       logic wr_en_x, wr_en_a, wr_en_y,clear_acc;
+	     logic [1:0] addr_x, addr_y, addr_z;
+       logic wr_en_x, wr_en_a, wr_en_y,clear_acc, overflow_temp, wr_en_z;
        logic [15:0] d_out,data_out_temp;
 
-       datapath d(clk, clear_acc, reset, data_in, addr_x, wr_en_x, addr_a, wr_en_a, d_out, data_out_temp, addr_y, wr_en_y, overflow, valid_in, valid_out);
-       control  c(clk, s_valid, s_ready, m_ready, m_valid, reset, addr_x, wr_en_x, addr_a, wr_en_a, clear_acc, addr_y, wr_en_y, valid_in, valid_out, data_out_temp, data_out);
+       datapath d(clk, clear_acc, reset, data_in, addr_x, wr_en_x, addr_a, wr_en_a, d_out, data_out_temp, addr_y, wr_en_y, overflow_temp, overflow, wr_en_z, addr_z, valid_in, valid_out);
+       control  c(clk, s_valid, s_ready, m_ready, m_valid, reset, addr_x, wr_en_x, addr_a, wr_en_a, clear_acc, addr_y, wr_en_y, valid_in, valid_out, data_out_temp, data_out, wr_en_z, addr_z, overflow, overflow_temp);
 
 endmodule
 //-----------------------------------------------------------------------------
 
 //Control module
 
-module control(clk, s_valid, s_ready, m_ready, m_valid, reset, addr_x, wr_en_x, addr_a, wr_en_a, clear_acc, addr_y, wr_en_y, valid_in, valid_out, data_out_temp, data_out);
+module control(clk, s_valid, s_ready, m_ready, m_valid, reset, addr_x, wr_en_x, addr_a, wr_en_a, clear_acc, addr_y, wr_en_y, valid_in, valid_out, data_out_temp, data_out, wr_en_z, addr_z, overflow, overflow_temp);
 
-       input clk, s_valid, reset, m_ready, valid_out;
+       input clk, s_valid, reset, m_ready, valid_out, overflow_temp;
        output logic [3:0] addr_a;
-	     output logic [1:0] addr_x, addr_y;
+	     output logic [1:0] addr_x, addr_y, addr_z;
        input logic [15:0] data_out_temp;
        output logic[15:0] data_out;
-       output logic wr_en_x, wr_en_a, clear_acc, wr_en_y, m_valid, s_ready, valid_in;
+       output logic wr_en_x, wr_en_a, clear_acc, wr_en_y, m_valid, s_ready, valid_in, overflow, wr_en_z;
        logic write_done_x, write_done_a, mac_done, read_done_y,c,dummy;
 	     logic [2:0] state, next_state;
 	     logic [1:0] multiplier, counter;
@@ -105,6 +105,7 @@ module control(clk, s_valid, s_ready, m_ready, m_valid, reset, addr_x, wr_en_x, 
           end
        always_ff @(posedge clk) begin
                     wr_en_y <= ((clear_acc==1)&(valid_out==1));
+                    wr_en_z <= ((clear_acc==1)&(valid_out==1));
                    end
 
        always_ff @(posedge clk) begin
@@ -116,6 +117,7 @@ module control(clk, s_valid, s_ready, m_ready, m_valid, reset, addr_x, wr_en_x, 
                 addr_y <= 0;
                 addr_x <= 0;
                 addr_a <= 0;
+                addr_z <= 0;
                 c <= 0;
                 dummy <=0;
             end
@@ -139,6 +141,7 @@ module control(clk, s_valid, s_ready, m_ready, m_valid, reset, addr_x, wr_en_x, 
                      end
                      else  begin
                             addr_y <= multiplier;
+                            addr_z <= multiplier;
                             multiplier <= multiplier + 1;
                             counter <= 0;
                      end
@@ -153,10 +156,12 @@ module control(clk, s_valid, s_ready, m_ready, m_valid, reset, addr_x, wr_en_x, 
                       mac_done <= 0;
                   if (dummy == 1 ) begin
                        addr_y <= 0;
+                       addr_z <= 0;
                        dummy <= 0;
                   end
                   else if ((m_valid==1) & (m_ready==1)) begin
                             addr_y <= addr_y + 1 ;
+                            addr_z <= addr_z + 1 ;
                          end
             end
        end
@@ -166,15 +171,15 @@ endmodule
 
 // Datapath module
 
-module datapath(clk, clear_acc, reset, data_in, addr_x, wr_en_x, addr_a, wr_en_a, d_out, data_out_temp, addr_y, wr_en_y, overflow, valid_in, valid_out);
+module datapath(clk, clear_acc, reset, data_in, addr_x, wr_en_x, addr_a, wr_en_a, d_out, data_out_temp, addr_y, wr_en_y, overflow_temp, overflow, wr_en_z, addr_z, valid_in, valid_out);
 
   input clk, reset, clear_acc;
-  input wr_en_x,wr_en_a, wr_en_y, valid_in;
+  input wr_en_x,wr_en_a, wr_en_y, wr_en_z, valid_in;
   input signed [7:0]data_in;
   input logic [3:0]addr_a;
-  input logic [1:0] addr_x, addr_y;
+  input logic [1:0] addr_x, addr_y, addr_z;
   output logic signed [15:0] d_out,data_out_temp;
-  output logic overflow, valid_out;
+  output logic overflow_temp, valid_out, overflow;
 
 //  logic signed [15:0] data_out_temp;
   logic signed [7:0] data_out_x, data_out_a;
@@ -182,8 +187,9 @@ module datapath(clk, clear_acc, reset, data_in, addr_x, wr_en_x, addr_a, wr_en_a
 
   memory #(8,3,2) x(clk, data_in, data_out_x, addr_x, wr_en_x);
   memory #(8,9,4) a(clk, data_in, data_out_a, addr_a, wr_en_a);
-  part2_mac m(clk, clear_acc, data_out_a, data_out_x, d_out, valid_in, valid_out, overflow);
+  part2_mac m(clk, clear_acc, data_out_a, data_out_x, d_out, valid_in, valid_out, overflow_temp);
   memory #(16,3,2) y(clk, d_out, data_out_temp, addr_y, wr_en_y);
+  memory #(1,3,2) z(clk, overflow_temp, overflow, addr_z, wr_en_z);
 
 
 endmodule
@@ -209,11 +215,11 @@ endmodule
 
 // MAC module
 
-module part2_mac(clk, clear_acc, a, b, d_out, valid_in, valid_out, overflow);
+module part2_mac(clk, clear_acc, a, b, d_out, valid_in, valid_out, overflow_temp);
         input clk, clear_acc, valid_in;
         input signed [7:0] a, b;
         output logic signed [15:0] d_out;
-        output logic valid_out, overflow;
+        output logic valid_out, overflow_temp;
 
         //internal logic
 
@@ -230,8 +236,7 @@ module part2_mac(clk, clear_acc, a, b, d_out, valid_in, valid_out, overflow);
                         ip2 <= 0;
                         f <= 0;
                         d_out <= add;
-
-
+                        overflow_int <= 0;
               end
 
               else  begin
@@ -241,10 +246,15 @@ module part2_mac(clk, clear_acc, a, b, d_out, valid_in, valid_out, overflow);
                   end
                   if ((enable_f)) begin
                         f <= add;
-                        overflow <= overflow_int;
                   end
-              end
-        end
+             end
+         end
+
+         always_ff @(posedge clk) begin
+           if ((valid_out)&(clear_acc)) begin
+              overflow_temp <= overflow_int;
+           end
+         end
 
 //MAC calculation
 
@@ -260,25 +270,26 @@ module part2_mac(clk, clear_acc, a, b, d_out, valid_in, valid_out, overflow);
         always_ff @(posedge clk)begin
 
                if(clear_acc == 1)begin
-                  valid_out <= 0 ;
-                  enable_f  <= 0 ;
+                    valid_out <= 0 ;
+                    enable_f <= 0;
                end
 
                else begin
-                  enable_f <= enable_ab;
-                  valid_out <= enable_f ;
+                    enable_f <= enable_ab;
+                    valid_out <= enable_f ;
+
                end
         end
 
 //Overflow Detector
 
-        always_ff @(posedge clk)begin
+        always_ff @ (posedge clk) begin
 
-               if(overflow)
+               if (overflow_temp)
                   overflow_int = 1;
 
                else if ((mul[15] == f[15])&&(add[15] != f[15]))
-                   overflow_int <= 1;
+                   overflow_int = 1;
 
                else
                     overflow_int =0;
