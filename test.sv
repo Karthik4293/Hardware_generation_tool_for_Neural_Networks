@@ -31,7 +31,7 @@ module control(clk, s_valid, s_ready, m_ready, m_valid, reset, addr_x, wr_en_x, 
        input logic [15:0] data_out_temp;
        output logic[15:0] data_out;
        output logic wr_en_x, wr_en_a, clear_acc, wr_en_y, m_valid, s_ready, valid_in;
-       logic write_done_x, write_done_a, mac_done, read_done_y,c;
+       logic write_done_x, write_done_a, mac_done, read_done_y,c,dummy;
 	     logic [2:0] state, next_state;
 	     logic [1:0] multiplier, counter;
 
@@ -39,7 +39,7 @@ module control(clk, s_valid, s_ready, m_ready, m_valid, reset, addr_x, wr_en_x, 
        always_ff @(posedge clk) begin
 
               if (reset == 1) begin
-                    state<=1;
+                    state<=0;
               end
 
               else
@@ -50,11 +50,11 @@ module control(clk, s_valid, s_ready, m_ready, m_valid, reset, addr_x, wr_en_x, 
 
           case (state)               // State explainations
 
-/*            0 : if ((s_valid == 1) && (s_ready == 1))               // State 0 checks valid input
+             0 : if (s_valid == 1)                // State 0 checks valid input
                    next_state = 1;
                 else
                    next_state = 0;
-*/
+
             1 : if (write_done_a == 1)          // State 2 starts writing into the memory and checks if write is done
                     next_state = 2;
                 else
@@ -71,7 +71,7 @@ module control(clk, s_valid, s_ready, m_ready, m_valid, reset, addr_x, wr_en_x, 
                     next_state = 3;
 
             4 : if (read_done_y == 1)              // State 5 put the output into a different memory
-                    next_state = 1;
+                    next_state = 0;
                 else
                     next_state = 4;
           endcase
@@ -91,9 +91,9 @@ module control(clk, s_valid, s_ready, m_ready, m_valid, reset, addr_x, wr_en_x, 
        assign write_done_a = ((state==1) && (addr_a == 8 )&&(s_valid)&&(s_ready));
        assign write_done_x = ((state==2) && (addr_x == 2)&&(s_valid)&&(s_ready));
        assign read_done_y = ((state==4) && (addr_y==2) && (m_valid) && (m_ready));
-       assign data_out = data_out_temp;
+       assign data_out = (state == 4) ? data_out_temp : 0 ;
 
-     always_ff @(posedge clk) begin
+       always_ff @(posedge clk) begin
                if (( state == 4) && (c == 1)) begin
                    m_valid <= 1;
                    c <= 0;
@@ -103,23 +103,24 @@ module control(clk, s_valid, s_ready, m_ready, m_valid, reset, addr_x, wr_en_x, 
                    c <= 1;
                 end
           end
+       always_ff @(posedge clk) begin
+                    wr_en_y <= ((clear_acc==1)&(valid_out==1));
+                   end
 
-    always_ff @(posedge clk) begin
-               wr_en_y <= ((clear_acc==1)&(valid_out==1)) ;
-             end
+       always_ff @(posedge clk) begin
 
+           if (state == 0) begin
+                multiplier <= 0;
+                mac_done <= 0;
+                counter <= 0;
+                addr_y <= 0;
+                addr_x <= 0;
+                addr_a <= 0;
+                c <= 0;
+                dummy <=0;
+            end
 
-      always_ff @(posedge clk) begin
-         if (reset) begin
-             multiplier <= 0;
-             mac_done <= 0;
-             counter <= 0;
-             addr_y <= 0;
-             addr_x <= 0;
-             addr_a <= 0;
-             c <= 0;
-        end
-        else   if (state == 1) begin
+            else if (state == 1) begin
                if ((write_done_a == 0) && (s_ready) && (s_valid))
                      addr_a <= addr_a + 1;
             end
@@ -144,19 +145,21 @@ module control(clk, s_valid, s_ready, m_ready, m_valid, reset, addr_x, wr_en_x, 
                  end
                  else begin
                      mac_done <= 1;
+                     dummy <= 1;
                  end
             end
 
-
             else if (state == 4) begin
                       mac_done <= 0;
-                  if (valid_out == 1)
+                  if (dummy == 1 ) begin
                        addr_y <= 0;
-                  else  if ((m_valid==1) & (m_ready==1)) begin
+                       dummy <= 0;
+                  end
+                  else if ((m_valid==1) & (m_ready==1)) begin
                             addr_y <= addr_y + 1 ;
                          end
             end
-      end
+       end
 
 endmodule
 //-----------------------------------------------------------------------------
@@ -257,7 +260,8 @@ module part2_mac(clk, clear_acc, a, b, d_out, valid_in, valid_out, overflow);
         always_ff @(posedge clk)begin
 
                if(clear_acc == 1)begin
-                  valid_out = 0 ;
+                  valid_out <= 0 ;
+                  enable_f  <= 0 ;
                end
 
                else begin
