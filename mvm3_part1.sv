@@ -12,7 +12,7 @@ module mvm3_part1 (clk, reset, s_valid, m_ready, data_in, m_valid, s_ready, data
 
        logic [3:0] addr_a;
 	     logic [1:0] addr_x, addr_y, addr_z;
-       logic wr_en_x, wr_en_a, wr_en_y,clear_acc, overflow_temp, wr_en_z,of;
+       logic wr_en_x, wr_en_a, wr_en_y,clear_acc, overflow_temp, wr_en_z, of, valid_in, valid_out;
        logic signed [15:0] d_out,data_out_temp;
 
        datapath d(clk, clear_acc, reset, data_in, addr_x, wr_en_x, addr_a, wr_en_a, d_out, data_out_temp, addr_y, wr_en_y, overflow_temp, of, wr_en_z, addr_z, valid_in, valid_out);
