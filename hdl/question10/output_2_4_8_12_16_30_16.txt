@@ -1,0 +1,460 @@
+
+                      Design Compiler Graphical
+                            DC Ultra (TM)
+                             DFTMAX (TM)
+                         Power Compiler (TM)
+                           DesignWare (R)
+                           DC Expert (TM)
+                         Design Vision (TM)
+                          HDL Compiler (TM)
+                         VHDL Compiler (TM)
+                            DFT Compiler
+                        Library Compiler (TM)
+                         Design Compiler(R)
+
+         Version J-2014.09-SP5-2 for RHEL64 -- Jul 11, 2015
+               Copyright (c) 1988-2015 Synopsys, Inc.
+
+This software and the associated documentation are confidential and 
+proprietary to Synopsys, Inc. Your use or disclosure of this software 
+is subject to the terms and conditions of a written license agreement 
+between you, or your company, and Synopsys, Inc.
+
+Initializing...
+##############################################
+# Setup: fill out the following parameters: name of clock signal, clock period (ns),
+# reset signal name (if used), name of top-level module, name of source file
+set CLK_NAME "clk";
+clk
+set CLK_PERIOD .80;
+.80
+set RST_NAME "reset";
+reset
+set TOP_MOD_NAME "network_4_8_12_16_30_16";
+network_4_8_12_16_30_16
+set SRC_FILE "network_4_8_12_16_30_16.sv";
+network_4_8_12_16_30_16.sv
+###############################################
+source setupdc.tcl
+NangateOpenCellLibrary_typical.db dw_foundation.sldb
+file mkdir work_synth
+define_design_lib WORK -path work_synth
+1
+analyze $SRC_FILE -format sverilog
+Running PRESTO HDLC
+Searching for ./network_4_8_12_16_30_16.sv
+Compiling source file ./network_4_8_12_16_30_16.sv
+Error:  ./network_4_8_12_16_30_16.sv:61: Syntax error at or near token ';'. (VER-294)
+Error:  ./network_4_8_12_16_30_16.sv:63: symbol rank must be a constant or parameter. (VER-260)
+Error:  Cannot recover from previous errors. (VER-518)
+*** Presto compilation terminated with 3 errors. ***
+Loading db file '/home/home4/pmilder/ese507/synthesis/lib/NangateOpenCellLibrary_typical.db'
+Loading db file '/usr/local/synopsys/syn/libraries/syn/dw_foundation.sldb'
+0
+elaborate -work WORK $TOP_MOD_NAME
+Loading db file '/usr/local/synopsys/syn/libraries/syn/gtech.db'
+Loading db file '/usr/local/synopsys/syn/libraries/syn/standard.sldb'
+  Loading link library 'NangateOpenCellLibrary'
+  Loading link library 'gtech'
+Running PRESTO HDLC
+Presto compilation completed successfully.
+Elaborated 1 design.
+Current design is now 'network_4_8_12_16_30_16'.
+Information: Building the design 'layer1_8_4_1_16'. (HDL-193)
+
+Inferred memory devices in process
+	in routine layer1_8_4_1_16 line 32 in file
+		'./network_4_8_12_16_30_16.sv'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|    out_count_reg    | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+===============================================================================
+Presto compilation completed successfully.
+Information: Building the design 'layer2_12_8_1_16'. (HDL-193)
+Warning: Cannot find the design 'layer2_12_8_1_16' in the library 'WORK'. (LBR-1)
+Information: Building the design 'layer3_16_12_1_16'. (HDL-193)
+Warning: Cannot find the design 'layer3_16_12_1_16' in the library 'WORK'. (LBR-1)
+Information: Building the design 'mvma_layer1_8_4_1_16' instantiated from design 'layer1_8_4_1_16' with
+	the parameters "rank=0". (HDL-193)
+Warning: Cannot find the design 'mvma_layer1_8_4_1_16' in the library 'WORK'. (LBR-1)
+Warning: Design 'network_4_8_12_16_30_16' has '3' unresolved references. For more detailed information, use the "link" command. (UID-341)
+1
+###### CLOCKS AND PORTS #######
+set CLK_PORT [get_ports $CLK_NAME]
+{clk}
+set TMP1 [remove_from_collection [all_inputs] $CLK_PORT]
+{reset s_valid m_ready data_in[15] data_in[14] data_in[13] data_in[12] data_in[11] data_in[10] data_in[9] data_in[8] data_in[7] data_in[6] data_in[5] data_in[4] data_in[3] data_in[2] data_in[1] data_in[0]}
+set INPUTS [remove_from_collection $TMP1 $RST_NAME]
+{s_valid m_ready data_in[15] data_in[14] data_in[13] data_in[12] data_in[11] data_in[10] data_in[9] data_in[8] data_in[7] data_in[6] data_in[5] data_in[4] data_in[3] data_in[2] data_in[1] data_in[0]}
+create_clock -period $CLK_PERIOD [get_ports clk]
+Warning: Design 'network_4_8_12_16_30_16' has '3' unresolved references. For more detailed information, use the "link" command. (UID-341)
+1
+# set delay for inputs to be 0.2ns
+set_input_delay 0.2 -max -clock clk $INPUTS
+Warning: Design 'network_4_8_12_16_30_16' has '3' unresolved references. For more detailed information, use the "link" command. (UID-341)
+1
+set_output_delay 0.2 -max -clock clk [all_outputs]
+Warning: Design 'network_4_8_12_16_30_16' has '3' unresolved references. For more detailed information, use the "link" command. (UID-341)
+1
+###### OPTIMIZATION #######
+#####set_max_area 0 
+set high_fanout_net_threshold 0
+0
+###### RUN #####
+compile_ultra
+Warning: Design 'network_4_8_12_16_30_16' has '3' unresolved references. For more detailed information, use the "link" command. (UID-341)
+Information: Performing power optimization. (PWR-850)
+Alib files are up-to-date.
+Information: Evaluating DesignWare library utilization. (UISN-27)
+
+============================================================================
+| DesignWare Building Block Library  |         Version         | Available |
+============================================================================
+| Basic DW Building Blocks           | J-2014.09-DWBB_201409.5.2 |   *     |
+| Licensed DW Building Blocks        | J-2014.09-DWBB_201409.5.2 |   *     |
+============================================================================
+
+Information: Sequential output inversion is enabled.  SVF file must be used for formal verification. (OPT-1208)
+
+Information: There are 39 potential problems in your design. Please run 'check_design' for more information. (LINT-99)
+
+
+Information: Building the design 'layer2_12_8_1_16'. (HDL-193)
+Warning: Cannot find the design 'layer2_12_8_1_16' in the library 'WORK'. (LBR-1)
+Information: Building the design 'layer3_16_12_1_16'. (HDL-193)
+Warning: Cannot find the design 'layer3_16_12_1_16' in the library 'WORK'. (LBR-1)
+Information: Building the design 'mvma_layer1_8_4_1_16' instantiated from design 'layer1_8_4_1_16' with
+	the parameters "rank=0". (HDL-193)
+Warning: Cannot find the design 'mvma_layer1_8_4_1_16' in the library 'WORK'. (LBR-1)
+Warning: Unable to resolve reference 'layer2_12_8_1_16' in 'network_4_8_12_16_30_16'. (LINK-5)
+Warning: Unable to resolve reference 'layer3_16_12_1_16' in 'network_4_8_12_16_30_16'. (LINK-5)
+Warning: Unable to resolve reference 'mvma_layer1_8_4_1_16' in 'layer1_8_4_1_16'. (LINK-5)
+Loaded alib file './alib-52/NangateOpenCellLibrary_typical.db.alib'
+  Building model 'DW01_NAND2'
+Information: Ungrouping 0 of 2 hierarchies before Pass 1 (OPT-775)
+Information: State dependent leakage is now switched from on to off.
+
+  Beginning Pass 1 Mapping
+  ------------------------
+  Processing 'network_4_8_12_16_30_16'
+  Processing 'layer1_8_4_1_16'
+Information: Building the design 'layer2_12_8_1_16'. (HDL-193)
+Warning: Cannot find the design 'layer2_12_8_1_16' in the library 'WORK'. (LBR-1)
+Information: Building the design 'layer3_16_12_1_16'. (HDL-193)
+Warning: Cannot find the design 'layer3_16_12_1_16' in the library 'WORK'. (LBR-1)
+Information: Building the design 'mvma_layer1_8_4_1_16' instantiated from design 'layer1_8_4_1_16' with
+	the parameters "rank=0". (HDL-193)
+Warning: Cannot find the design 'mvma_layer1_8_4_1_16' in the library 'WORK'. (LBR-1)
+Warning: Unable to resolve reference 'layer2_12_8_1_16' in 'network_4_8_12_16_30_16'. (LINK-5)
+Warning: Unable to resolve reference 'layer3_16_12_1_16' in 'network_4_8_12_16_30_16'. (LINK-5)
+Warning: Unable to resolve reference 'mvma_layer1_8_4_1_16' in 'layer1_8_4_1_16'. (LINK-5)
+Warning: Design 'network_4_8_12_16_30_16' has '3' unresolved references. For more detailed information, use the "link" command. (UID-341)
+
+  Updating timing information
+Information: Updating design information... (UID-85)
+
+  Beginning Mapping Optimizations  (Ultra High effort)
+  -------------------------------
+  Mapping Optimization (Phase 1)
+Information: The register 'layer1/out_count_reg[0]' is a constant and will be removed. (OPT-1206)
+
+                                  TOTAL                                                
+   ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:00:01      17.0      0.00       0.0       0.0                            401.0570
+    0:00:01      17.0      0.00       0.0       0.0                            401.0570
+    0:00:01      17.0      0.00       0.0       0.0                            401.0570
+    0:00:01      17.0      0.00       0.0       0.0                            401.0570
+  Re-synthesis Optimization (Phase 1)
+  Re-synthesis Optimization (Phase 2)
+  Global Optimization (Phase 1)
+  Global Optimization (Phase 2)
+  Global Optimization (Phase 3)
+  Global Optimization (Phase 4)
+  Global Optimization (Phase 5)
+  Global Optimization (Phase 6)
+  Global Optimization (Phase 7)
+  Global Optimization (Phase 8)
+  Global Optimization (Phase 9)
+  Global Optimization (Phase 10)
+  Global Optimization (Phase 11)
+  Global Optimization (Phase 12)
+  Global Optimization (Phase 13)
+  Global Optimization (Phase 14)
+  Global Optimization (Phase 15)
+  Global Optimization (Phase 16)
+  Global Optimization (Phase 17)
+  Global Optimization (Phase 18)
+  Global Optimization (Phase 19)
+  Global Optimization (Phase 20)
+  Global Optimization (Phase 21)
+  Global Optimization (Phase 22)
+  Global Optimization (Phase 23)
+  Global Optimization (Phase 24)
+  Global Optimization (Phase 25)
+  Global Optimization (Phase 26)
+  Global Optimization (Phase 27)
+  Global Optimization (Phase 28)
+
+
+
+  Beginning Delay Optimization Phase
+  ----------------------------------
+
+                                  TOTAL                                                
+   ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:00:01      17.0      0.00       0.0       0.0                            401.0570
+    0:00:01      17.0      0.00       0.0       0.0                            401.0570
+    0:00:01      17.0      0.00       0.0       0.0                            401.0570
+    0:00:01      17.0      0.00       0.0       0.0                            401.0570
+    0:00:01      17.0      0.00       0.0       0.0                            401.0570
+    0:00:01      17.0      0.00       0.0       0.0                            401.0570
+    0:00:01      17.0      0.00       0.0       0.0                            401.0570
+    0:00:01      17.0      0.00       0.0       0.0                            401.0570
+    0:00:01      17.0      0.00       0.0       0.0                            401.0570
+    0:00:01      17.0      0.00       0.0       0.0                            401.0570
+    0:00:01      17.0      0.00       0.0       0.0                            401.0570
+    0:00:01      17.0      0.00       0.0       0.0                            401.0570
+    0:00:01      17.0      0.00       0.0       0.0                            401.0570
+
+  Beginning Delay Optimization
+  ----------------------------
+    0:00:01      17.0      0.00       0.0       0.0                            401.0570
+    0:00:01      17.0      0.00       0.0       0.0                            401.0570
+    0:00:01      17.0      0.00       0.0       0.0                            401.0570
+    0:00:01      17.0      0.00       0.0       0.0                            401.0570
+    0:00:01      17.0      0.00       0.0       0.0                            401.0570
+    0:00:01      17.0      0.00       0.0       0.0                            401.0570
+    0:00:01      17.0      0.00       0.0       0.0                            401.0570
+    0:00:01      17.0      0.00       0.0       0.0                            401.0570
+    0:00:01      17.0      0.00       0.0       0.0                            401.0570
+    0:00:01      17.0      0.00       0.0       0.0                            401.0570
+
+                                  TOTAL                                                
+   ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:00:01      17.0      0.00       0.0       0.0                            401.0570
+    0:00:01      17.0      0.00       0.0       0.0                            401.0570
+
+
+  Beginning Leakage Power Optimization  (max_leakage_power 0)
+  ------------------------------------
+
+                                  TOTAL                                                
+   ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:00:01      17.0      0.00       0.0       0.0                            401.0570
+  Global Optimization (Phase 29)
+  Global Optimization (Phase 30)
+  Global Optimization (Phase 31)
+  Global Optimization (Phase 32)
+  Global Optimization (Phase 33)
+  Global Optimization (Phase 34)
+  Global Optimization (Phase 35)
+  Global Optimization (Phase 36)
+  Global Optimization (Phase 37)
+  Global Optimization (Phase 38)
+    0:00:01      17.0      0.00       0.0       0.0                            401.0570
+    0:00:01      17.0      0.00       0.0       0.0                            401.0570
+    0:00:01      17.0      0.00       0.0       0.0                            401.0570
+    0:00:01      17.0      0.00       0.0       0.0                            401.0570
+    0:00:01      17.0      0.00       0.0       0.0                            401.0570
+    0:00:01      17.0      0.00       0.0       0.0                            401.0570
+    0:00:01      17.0      0.00       0.0       0.0                            401.0570
+    0:00:01      17.0      0.00       0.0       0.0                            401.0570
+    0:00:01      17.0      0.00       0.0       0.0                            401.0570
+    0:00:01      17.0      0.00       0.0       0.0                            401.0570
+    0:00:01      17.0      0.00       0.0       0.0                            401.0570
+    0:00:01      17.0      0.00       0.0       0.0                            401.0570
+    0:00:01      17.0      0.00       0.0       0.0                            401.0570
+    0:00:01      17.0      0.00       0.0       0.0                            401.0570
+    0:00:01      17.0      0.00       0.0       0.0                            401.0570
+    0:00:01      17.0      0.00       0.0       0.0                            401.0570
+    0:00:01      17.0      0.00       0.0       0.0                            401.0570
+    0:00:01      17.0      0.00       0.0       0.0                            401.0570
+    0:00:01      17.0      0.00       0.0       0.0                            401.0570
+    0:00:01      17.0      0.00       0.0       0.0                            401.0570
+    0:00:01      17.0      0.00       0.0       0.0                            401.0570
+    0:00:01      17.0      0.00       0.0       0.0                            401.0570
+
+                                  TOTAL                                                
+   ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:00:01      17.0      0.00       0.0       0.0                            401.0570
+    0:00:01      17.0      0.00       0.0       0.0                            401.0570
+    0:00:01      17.0      0.00       0.0       0.0                            401.0570
+    0:00:01      17.0      0.00       0.0       0.0                            401.0570
+    0:00:01      17.0      0.00       0.0       0.0                            401.0570
+    0:00:01      17.0      0.00       0.0       0.0                            401.0570
+    0:00:01      17.0      0.00       0.0       0.0                            401.0570
+Loading db file '/home/home4/pmilder/ese507/synthesis/lib/NangateOpenCellLibrary_typical.db'
+
+
+Note: Symbol # after min delay cost means estimated hold TNS across all active scenarios 
+
+
+  Optimization Complete
+  ---------------------
+Information: Building the design 'layer2_12_8_1_16'. (HDL-193)
+Warning: Cannot find the design 'layer2_12_8_1_16' in the library 'WORK'. (LBR-1)
+Information: Building the design 'layer3_16_12_1_16'. (HDL-193)
+Warning: Cannot find the design 'layer3_16_12_1_16' in the library 'WORK'. (LBR-1)
+Information: Building the design 'mvma_layer1_8_4_1_16' instantiated from design 'layer1_8_4_1_16' with
+	the parameters "rank=0". (HDL-193)
+Warning: Cannot find the design 'mvma_layer1_8_4_1_16' in the library 'WORK'. (LBR-1)
+Warning: Unable to resolve reference 'layer2_12_8_1_16' in 'network_4_8_12_16_30_16'. (LINK-5)
+Warning: Unable to resolve reference 'layer3_16_12_1_16' in 'network_4_8_12_16_30_16'. (LINK-5)
+Warning: Unable to resolve reference 'mvma_layer1_8_4_1_16' in 'layer1_8_4_1_16'. (LINK-5)
+Information: State dependent leakage is now switched from off to on.
+Information: Propagating switching activity (low effort zero delay simulation). (PWR-6)
+Warning: Design has unannotated black box outputs. (PWR-428)
+1
+report_area
+Information: Building the design 'layer2_12_8_1_16'. (HDL-193)
+Warning: Cannot find the design 'layer2_12_8_1_16' in the library 'WORK'. (LBR-1)
+Information: Building the design 'layer3_16_12_1_16'. (HDL-193)
+Warning: Cannot find the design 'layer3_16_12_1_16' in the library 'WORK'. (LBR-1)
+Information: Building the design 'mvma_layer1_8_4_1_16' instantiated from design 'layer1_8_4_1_16' with
+	the parameters "rank=0". (HDL-193)
+Warning: Cannot find the design 'mvma_layer1_8_4_1_16' in the library 'WORK'. (LBR-1)
+Warning: Unable to resolve reference 'layer2_12_8_1_16' in 'network_4_8_12_16_30_16'. (LINK-5)
+Warning: Unable to resolve reference 'layer3_16_12_1_16' in 'network_4_8_12_16_30_16'. (LINK-5)
+Warning: Unable to resolve reference 'mvma_layer1_8_4_1_16' in 'layer1_8_4_1_16'. (LINK-5)
+ 
+****************************************
+Report : area
+Design : network_4_8_12_16_30_16
+Version: J-2014.09-SP5-2
+Date   : Fri Dec  8 23:41:51 2017
+****************************************
+
+Information: Updating design information... (UID-85)
+Library(s) Used:
+
+    NangateOpenCellLibrary (File: /home/home4/pmilder/ese507/synthesis/lib/NangateOpenCellLibrary_typical.db)
+
+Number of ports:                           38
+Number of nets:                            74
+Number of cells:                            3
+Number of combinational cells:              0
+Number of sequential cells:                 2
+Number of macros/black boxes:               0
+Number of buf/inv:                          0
+Number of references:                       3
+
+Combinational area:                 17.024000
+Buf/Inv area:                        0.000000
+Noncombinational area:               0.000000
+Macro/Black Box area:                0.000000
+Net Interconnect area:      undefined  (Wire load has zero net area)
+
+Total cell area:                    17.024000
+Total area:                 undefined
+
+Information: This design contains black box (unknown) components. (RPT-8)
+1
+report_power
+ 
+****************************************
+Report : power
+        -analysis_effort low
+Design : network_4_8_12_16_30_16
+Version: J-2014.09-SP5-2
+Date   : Fri Dec  8 23:41:51 2017
+****************************************
+
+
+Library(s) Used:
+
+    NangateOpenCellLibrary (File: /home/home4/pmilder/ese507/synthesis/lib/NangateOpenCellLibrary_typical.db)
+
+
+Operating Conditions: typical   Library: NangateOpenCellLibrary
+Wire Load Model Mode: top
+
+Design        Wire Load Model            Library
+------------------------------------------------
+network_4_8_12_16_30_16
+                       5K_hvratio_1_1    NangateOpenCellLibrary
+
+
+Global Operating Voltage = 1.1  
+Power-specific unit information :
+    Voltage Units = 1V
+    Capacitance Units = 1.000000ff
+    Time Units = 1ns
+    Dynamic Power Units = 1uW    (derived from V,C,T units)
+    Leakage Power Units = 1nW
+
+
+  Cell Internal Power  =   4.8707 uW   (53%)
+  Net Switching Power  =   4.3954 uW   (47%)
+                         ---------
+Total Dynamic Power    =   9.2660 uW  (100%)
+
+Cell Leakage Power     = 392.7136 nW
+
+
+                 Internal         Switching           Leakage            Total
+Power Group      Power            Power               Power              Power   (   %    )  Attrs
+--------------------------------------------------------------------------------------------------
+io_pad             0.0000            0.0000            0.0000            0.0000  (   0.00%)
+memory             0.0000            0.0000            0.0000            0.0000  (   0.00%)
+black_box          0.0000            0.0000            0.0000            0.0000  (   0.00%)
+clock_network      4.8707            4.3954          392.7136            9.6587  ( 100.00%)
+register           0.0000            0.0000            0.0000            0.0000  (   0.00%)
+sequential         0.0000            0.0000            0.0000            0.0000  (   0.00%)
+combinational      0.0000            0.0000            0.0000            0.0000  (   0.00%)
+--------------------------------------------------------------------------------------------------
+Total              4.8707 uW         4.3954 uW       392.7136 nW         9.6587 uW
+1
+report_timing
+Warning: Design 'network_4_8_12_16_30_16' has '3' unresolved references. For more detailed information, use the "link" command. (UID-341)
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+Design : network_4_8_12_16_30_16
+Version: J-2014.09-SP5-2
+Date   : Fri Dec  8 23:41:51 2017
+****************************************
+
+Operating Conditions: typical   Library: NangateOpenCellLibrary
+Wire Load Model Mode: top
+
+  Startpoint: layer3/p6 (internal pin)
+  Endpoint: m_valid (output port clocked by clk)
+  Path Group: (none)
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  network_4_8_12_16_30_16
+                     5K_hvratio_1_1        NangateOpenCellLibrary
+
+  Point                                    Incr       Path
+  -----------------------------------------------------------
+  layer3/p6 (layer3_16_12_1_16)            0.00       0.00 r
+  m_valid (out)                            0.00       0.00 r
+  data arrival time                                   0.00
+  -----------------------------------------------------------
+  (Path is unconstrained)
+
+
+1
+write -f verilog $TOP_MOD_NAME -output gates.v -hierarchy
+Warning: Design 'network_4_8_12_16_30_16' has '3' unresolved references. For more detailed information, use the "link" command. (UID-341)
+Writing verilog file '/home/home5/rrubio/rrubio_ese507work/proj3/part1/gates.v'.
+1
+quit
+
+Thank you...

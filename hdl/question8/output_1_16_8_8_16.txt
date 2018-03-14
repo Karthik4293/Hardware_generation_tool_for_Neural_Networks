@@ -1,0 +1,1116 @@
+
+                      Design Compiler Graphical
+                            DC Ultra (TM)
+                             DFTMAX (TM)
+                         Power Compiler (TM)
+                           DesignWare (R)
+                           DC Expert (TM)
+                         Design Vision (TM)
+                          HDL Compiler (TM)
+                         VHDL Compiler (TM)
+                            DFT Compiler
+                        Library Compiler (TM)
+                         Design Compiler(R)
+
+         Version J-2014.09-SP5-2 for RHEL64 -- Jul 11, 2015
+               Copyright (c) 1988-2015 Synopsys, Inc.
+
+This software and the associated documentation are confidential and 
+proprietary to Synopsys, Inc. Your use or disclosure of this software 
+is subject to the terms and conditions of a written license agreement 
+between you, or your company, and Synopsys, Inc.
+
+Initializing...
+##############################################
+# Setup: fill out the following parameters: name of clock signal, clock period (ns),
+# reset signal name (if used), name of top-level module, name of source file
+set CLK_NAME "clk";
+clk
+set CLK_PERIOD .95;
+.95
+set RST_NAME "reset";
+reset
+set TOP_MOD_NAME "layer_16_8_8_16";
+layer_16_8_8_16
+set SRC_FILE "layer_16_8_8_16.sv";
+layer_16_8_8_16.sv
+###############################################
+source setupdc.tcl
+NangateOpenCellLibrary_typical.db dw_foundation.sldb
+file mkdir work_synth
+define_design_lib WORK -path work_synth
+1
+analyze $SRC_FILE -format sverilog
+Running PRESTO HDLC
+Searching for ./layer_16_8_8_16.sv
+Compiling source file ./layer_16_8_8_16.sv
+Presto compilation completed successfully.
+Loading db file '/home/home4/pmilder/ese507/synthesis/lib/NangateOpenCellLibrary_typical.db'
+Loading db file '/usr/local/synopsys/syn/libraries/syn/dw_foundation.sldb'
+1
+elaborate -work WORK $TOP_MOD_NAME
+Loading db file '/usr/local/synopsys/syn/libraries/syn/gtech.db'
+Loading db file '/usr/local/synopsys/syn/libraries/syn/standard.sldb'
+  Loading link library 'NangateOpenCellLibrary'
+  Loading link library 'gtech'
+Running PRESTO HDLC
+
+Inferred memory devices in process
+	in routine layer_16_8_8_16 line 25 in file
+		'./layer_16_8_8_16.sv'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|    out_count_reg    | Flip-flop |   8   |  Y  | N  | N  | N  | N  | N  | N  |
+===============================================================================
+Presto compilation completed successfully.
+Elaborated 1 design.
+Current design is now 'layer_16_8_8_16'.
+Information: Building the design 'mvma' instantiated from design 'layer_16_8_8_16' with
+	the parameters "rank=0". (HDL-193)
+Presto compilation completed successfully.
+Information: Building the design 'mvma' instantiated from design 'layer_16_8_8_16' with
+	the parameters "rank=1". (HDL-193)
+Presto compilation completed successfully.
+Information: Building the design 'mvma' instantiated from design 'layer_16_8_8_16' with
+	the parameters "rank=2". (HDL-193)
+Presto compilation completed successfully.
+Information: Building the design 'mvma' instantiated from design 'layer_16_8_8_16' with
+	the parameters "rank=3". (HDL-193)
+Presto compilation completed successfully.
+Information: Building the design 'mvma' instantiated from design 'layer_16_8_8_16' with
+	the parameters "rank=4". (HDL-193)
+Presto compilation completed successfully.
+Information: Building the design 'mvma' instantiated from design 'layer_16_8_8_16' with
+	the parameters "rank=5". (HDL-193)
+Presto compilation completed successfully.
+Information: Building the design 'mvma' instantiated from design 'layer_16_8_8_16' with
+	the parameters "rank=6". (HDL-193)
+Presto compilation completed successfully.
+Information: Building the design 'mvma' instantiated from design 'layer_16_8_8_16' with
+	the parameters "rank=7". (HDL-193)
+Presto compilation completed successfully.
+Information: Building the design 'control' instantiated from design 'mvma_rank0' with
+	the parameters "rank=0". (HDL-193)
+
+Inferred memory devices in process
+	in routine control_rank0 line 103 in file
+		'./layer_16_8_8_16.sv'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|  input_buffer_reg   | Flip-flop |  16   |  Y  | N  | N  | N  | N  | N  | N  |
+|     s_ready_reg     | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|     addr_x_reg      | Flip-flop |   3   |  Y  | N  | N  | N  | N  | N  | N  |
+|     addr_w_reg      | Flip-flop |   7   |  Y  | N  | N  | N  | N  | N  | N  |
+|     addr_b_reg      | Flip-flop |   4   |  Y  | N  | N  | N  | N  | N  | N  |
+|    accum_src_reg    | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|    computing_reg    | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|  input_counter_reg  | Flip-flop |   4   |  Y  | N  | N  | N  | N  | N  | N  |
+| output_counter_reg  | Flip-flop |   4   |  Y  | N  | N  | N  | N  | N  | N  |
+|    accum_en_reg     | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|     m_valid_reg     | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|      block_reg      | Flip-flop |   5   |  Y  | N  | N  | N  | N  | N  | N  |
+|      count_reg      | Flip-flop |   4   |  Y  | N  | N  | N  | N  | N  | N  |
+|        c_reg        | Flip-flop |   9   |  Y  | N  | N  | N  | N  | N  | N  |
+|      temp_reg       | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+===============================================================================
+Presto compilation completed successfully.
+Information: Building the design 'datapath'. (HDL-193)
+
+Inferred memory devices in process
+	in routine datapath line 435 in file
+		'./layer_16_8_8_16.sv'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|    mult_out_reg     | Flip-flop |  16   |  Y  | N  | N  | N  | N  | N  | N  |
+|    data_out_reg     | Flip-flop |  16   |  Y  | N  | N  | N  | N  | N  | N  |
+===============================================================================
+Presto compilation completed successfully.
+Information: Building the design 'control' instantiated from design 'mvma_rank1' with
+	the parameters "rank=1". (HDL-193)
+
+Inferred memory devices in process
+	in routine control_rank1 line 103 in file
+		'./layer_16_8_8_16.sv'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|  input_buffer_reg   | Flip-flop |  16   |  Y  | N  | N  | N  | N  | N  | N  |
+|     s_ready_reg     | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|     addr_x_reg      | Flip-flop |   3   |  Y  | N  | N  | N  | N  | N  | N  |
+|     addr_w_reg      | Flip-flop |   7   |  Y  | N  | N  | N  | N  | N  | N  |
+|     addr_b_reg      | Flip-flop |   4   |  Y  | N  | N  | N  | N  | N  | N  |
+|    accum_src_reg    | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|    computing_reg    | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|  input_counter_reg  | Flip-flop |   4   |  Y  | N  | N  | N  | N  | N  | N  |
+| output_counter_reg  | Flip-flop |   4   |  Y  | N  | N  | N  | N  | N  | N  |
+|    accum_en_reg     | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|     m_valid_reg     | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|      block_reg      | Flip-flop |   5   |  Y  | N  | N  | N  | N  | N  | N  |
+|      count_reg      | Flip-flop |   4   |  Y  | N  | N  | N  | N  | N  | N  |
+|        c_reg        | Flip-flop |   9   |  Y  | N  | N  | N  | N  | N  | N  |
+|      temp_reg       | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+===============================================================================
+Presto compilation completed successfully.
+Information: Building the design 'control' instantiated from design 'mvma_rank2' with
+	the parameters "rank=2". (HDL-193)
+
+Inferred memory devices in process
+	in routine control_rank2 line 103 in file
+		'./layer_16_8_8_16.sv'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|  input_buffer_reg   | Flip-flop |  16   |  Y  | N  | N  | N  | N  | N  | N  |
+|     s_ready_reg     | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|     addr_x_reg      | Flip-flop |   3   |  Y  | N  | N  | N  | N  | N  | N  |
+|     addr_w_reg      | Flip-flop |   7   |  Y  | N  | N  | N  | N  | N  | N  |
+|     addr_b_reg      | Flip-flop |   4   |  Y  | N  | N  | N  | N  | N  | N  |
+|    accum_src_reg    | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|    computing_reg    | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|  input_counter_reg  | Flip-flop |   4   |  Y  | N  | N  | N  | N  | N  | N  |
+| output_counter_reg  | Flip-flop |   4   |  Y  | N  | N  | N  | N  | N  | N  |
+|    accum_en_reg     | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|     m_valid_reg     | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|      block_reg      | Flip-flop |   5   |  Y  | N  | N  | N  | N  | N  | N  |
+|      count_reg      | Flip-flop |   4   |  Y  | N  | N  | N  | N  | N  | N  |
+|        c_reg        | Flip-flop |   9   |  Y  | N  | N  | N  | N  | N  | N  |
+|      temp_reg       | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+===============================================================================
+Presto compilation completed successfully.
+Information: Building the design 'control' instantiated from design 'mvma_rank3' with
+	the parameters "rank=3". (HDL-193)
+
+Inferred memory devices in process
+	in routine control_rank3 line 103 in file
+		'./layer_16_8_8_16.sv'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|  input_buffer_reg   | Flip-flop |  16   |  Y  | N  | N  | N  | N  | N  | N  |
+|     s_ready_reg     | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|     addr_x_reg      | Flip-flop |   3   |  Y  | N  | N  | N  | N  | N  | N  |
+|     addr_w_reg      | Flip-flop |   7   |  Y  | N  | N  | N  | N  | N  | N  |
+|     addr_b_reg      | Flip-flop |   4   |  Y  | N  | N  | N  | N  | N  | N  |
+|    accum_src_reg    | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|    computing_reg    | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|  input_counter_reg  | Flip-flop |   4   |  Y  | N  | N  | N  | N  | N  | N  |
+| output_counter_reg  | Flip-flop |   4   |  Y  | N  | N  | N  | N  | N  | N  |
+|    accum_en_reg     | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|     m_valid_reg     | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|      block_reg      | Flip-flop |   5   |  Y  | N  | N  | N  | N  | N  | N  |
+|      count_reg      | Flip-flop |   4   |  Y  | N  | N  | N  | N  | N  | N  |
+|        c_reg        | Flip-flop |   9   |  Y  | N  | N  | N  | N  | N  | N  |
+|      temp_reg       | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+===============================================================================
+Presto compilation completed successfully.
+Information: Building the design 'control' instantiated from design 'mvma_rank4' with
+	the parameters "rank=4". (HDL-193)
+
+Inferred memory devices in process
+	in routine control_rank4 line 103 in file
+		'./layer_16_8_8_16.sv'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|  input_buffer_reg   | Flip-flop |  16   |  Y  | N  | N  | N  | N  | N  | N  |
+|     s_ready_reg     | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|     addr_x_reg      | Flip-flop |   3   |  Y  | N  | N  | N  | N  | N  | N  |
+|     addr_w_reg      | Flip-flop |   7   |  Y  | N  | N  | N  | N  | N  | N  |
+|     addr_b_reg      | Flip-flop |   4   |  Y  | N  | N  | N  | N  | N  | N  |
+|    accum_src_reg    | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|    computing_reg    | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|  input_counter_reg  | Flip-flop |   4   |  Y  | N  | N  | N  | N  | N  | N  |
+| output_counter_reg  | Flip-flop |   4   |  Y  | N  | N  | N  | N  | N  | N  |
+|    accum_en_reg     | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|     m_valid_reg     | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|      block_reg      | Flip-flop |   5   |  Y  | N  | N  | N  | N  | N  | N  |
+|      count_reg      | Flip-flop |   4   |  Y  | N  | N  | N  | N  | N  | N  |
+|        c_reg        | Flip-flop |   9   |  Y  | N  | N  | N  | N  | N  | N  |
+|      temp_reg       | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+===============================================================================
+Presto compilation completed successfully.
+Information: Building the design 'control' instantiated from design 'mvma_rank5' with
+	the parameters "rank=5". (HDL-193)
+
+Inferred memory devices in process
+	in routine control_rank5 line 103 in file
+		'./layer_16_8_8_16.sv'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|  input_buffer_reg   | Flip-flop |  16   |  Y  | N  | N  | N  | N  | N  | N  |
+|     s_ready_reg     | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|     addr_x_reg      | Flip-flop |   3   |  Y  | N  | N  | N  | N  | N  | N  |
+|     addr_w_reg      | Flip-flop |   7   |  Y  | N  | N  | N  | N  | N  | N  |
+|     addr_b_reg      | Flip-flop |   4   |  Y  | N  | N  | N  | N  | N  | N  |
+|    accum_src_reg    | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|    computing_reg    | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|  input_counter_reg  | Flip-flop |   4   |  Y  | N  | N  | N  | N  | N  | N  |
+| output_counter_reg  | Flip-flop |   4   |  Y  | N  | N  | N  | N  | N  | N  |
+|    accum_en_reg     | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|     m_valid_reg     | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|      block_reg      | Flip-flop |   5   |  Y  | N  | N  | N  | N  | N  | N  |
+|      count_reg      | Flip-flop |   4   |  Y  | N  | N  | N  | N  | N  | N  |
+|        c_reg        | Flip-flop |   9   |  Y  | N  | N  | N  | N  | N  | N  |
+|      temp_reg       | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+===============================================================================
+Presto compilation completed successfully.
+Information: Building the design 'control' instantiated from design 'mvma_rank6' with
+	the parameters "rank=6". (HDL-193)
+
+Inferred memory devices in process
+	in routine control_rank6 line 103 in file
+		'./layer_16_8_8_16.sv'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|  input_buffer_reg   | Flip-flop |  16   |  Y  | N  | N  | N  | N  | N  | N  |
+|     s_ready_reg     | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|     addr_x_reg      | Flip-flop |   3   |  Y  | N  | N  | N  | N  | N  | N  |
+|     addr_w_reg      | Flip-flop |   7   |  Y  | N  | N  | N  | N  | N  | N  |
+|     addr_b_reg      | Flip-flop |   4   |  Y  | N  | N  | N  | N  | N  | N  |
+|    accum_src_reg    | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|    computing_reg    | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|  input_counter_reg  | Flip-flop |   4   |  Y  | N  | N  | N  | N  | N  | N  |
+| output_counter_reg  | Flip-flop |   4   |  Y  | N  | N  | N  | N  | N  | N  |
+|    accum_en_reg     | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|     m_valid_reg     | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|      block_reg      | Flip-flop |   5   |  Y  | N  | N  | N  | N  | N  | N  |
+|      count_reg      | Flip-flop |   4   |  Y  | N  | N  | N  | N  | N  | N  |
+|        c_reg        | Flip-flop |   9   |  Y  | N  | N  | N  | N  | N  | N  |
+|      temp_reg       | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+===============================================================================
+Presto compilation completed successfully.
+Information: Building the design 'control' instantiated from design 'mvma_rank7' with
+	the parameters "rank=7". (HDL-193)
+
+Inferred memory devices in process
+	in routine control_rank7 line 103 in file
+		'./layer_16_8_8_16.sv'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|  input_buffer_reg   | Flip-flop |  16   |  Y  | N  | N  | N  | N  | N  | N  |
+|     s_ready_reg     | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|     addr_x_reg      | Flip-flop |   3   |  Y  | N  | N  | N  | N  | N  | N  |
+|     addr_w_reg      | Flip-flop |   7   |  Y  | N  | N  | N  | N  | N  | N  |
+|     addr_b_reg      | Flip-flop |   4   |  Y  | N  | N  | N  | N  | N  | N  |
+|    accum_src_reg    | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|    computing_reg    | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|  input_counter_reg  | Flip-flop |   4   |  Y  | N  | N  | N  | N  | N  | N  |
+| output_counter_reg  | Flip-flop |   4   |  Y  | N  | N  | N  | N  | N  | N  |
+|    accum_en_reg     | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|     m_valid_reg     | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|      block_reg      | Flip-flop |   5   |  Y  | N  | N  | N  | N  | N  | N  |
+|      count_reg      | Flip-flop |   4   |  Y  | N  | N  | N  | N  | N  | N  |
+|        c_reg        | Flip-flop |   9   |  Y  | N  | N  | N  | N  | N  | N  |
+|      temp_reg       | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+===============================================================================
+Presto compilation completed successfully.
+Information: Building the design 'memory' instantiated from design 'datapath' with
+	the parameters "16,8,3". (HDL-193)
+
+Inferred memory devices in process
+	in routine memory_WIDTH16_SIZE8_LOGSIZE3 line 234 in file
+		'./layer_16_8_8_16.sv'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|    data_out_reg     | Flip-flop |  16   |  Y  | N  | N  | N  | N  | N  | N  |
+|       mem_reg       | Flip-flop |  16   |  Y  | N  | N  | N  | N  | N  | N  |
+|       mem_reg       | Flip-flop |  16   |  Y  | N  | N  | N  | N  | N  | N  |
+|       mem_reg       | Flip-flop |  16   |  Y  | N  | N  | N  | N  | N  | N  |
+|       mem_reg       | Flip-flop |  16   |  Y  | N  | N  | N  | N  | N  | N  |
+|       mem_reg       | Flip-flop |  16   |  Y  | N  | N  | N  | N  | N  | N  |
+|       mem_reg       | Flip-flop |  16   |  Y  | N  | N  | N  | N  | N  | N  |
+|       mem_reg       | Flip-flop |  16   |  Y  | N  | N  | N  | N  | N  | N  |
+|       mem_reg       | Flip-flop |  16   |  Y  | N  | N  | N  | N  | N  | N  |
+===============================================================================
+Statistics for MUX_OPs
+============================================================================
+|         block name/line           | Inputs | Outputs | # sel inputs | MB |
+============================================================================
+| memory_WIDTH16_SIZE8_LOGSIZE3/235 |   8    |   16    |      3       | N  |
+============================================================================
+Presto compilation completed successfully.
+Information: Building the design 'layer_16_8_8_16_W_rom'. (HDL-193)
+Warning:  ./layer_16_8_8_16.sv:248: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:249: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:250: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:252: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:256: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:257: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:259: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:261: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:262: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:263: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:264: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:265: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:266: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:267: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:269: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:273: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:280: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:285: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:286: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:287: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:289: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:290: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:293: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:297: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:299: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:300: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:302: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:303: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:305: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:307: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:308: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:309: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:310: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:311: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:312: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:314: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:316: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:317: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:318: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:321: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:322: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:323: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:325: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:326: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:327: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:328: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:335: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:338: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:340: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:342: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:344: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:345: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:346: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:351: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:353: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:355: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:356: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:358: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:363: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:366: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:367: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:368: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:370: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:372: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:374: unsigned to signed assignment occurs. (VER-318)
+
+Statistics for case statements in always block at line 245 in file
+	'./layer_16_8_8_16.sv'
+===============================================
+|           Line           |  full/ parallel  |
+===============================================
+|           246            |    auto/auto     |
+===============================================
+
+Inferred memory devices in process
+	in routine layer_16_8_8_16_W_rom line 245 in file
+		'./layer_16_8_8_16.sv'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|        z_reg        | Flip-flop |  16   |  Y  | N  | N  | N  | N  | N  | N  |
+===============================================================================
+Presto compilation completed successfully.
+Information: Building the design 'layer_16_8_8_16_B_rom'. (HDL-193)
+Warning:  ./layer_16_8_8_16.sv:390: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:391: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:392: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:393: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:394: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_16_8_8_16.sv:396: unsigned to signed assignment occurs. (VER-318)
+
+Statistics for case statements in always block at line 383 in file
+	'./layer_16_8_8_16.sv'
+===============================================
+|           Line           |  full/ parallel  |
+===============================================
+|           384            |    auto/auto     |
+===============================================
+
+Inferred memory devices in process
+	in routine layer_16_8_8_16_B_rom line 383 in file
+		'./layer_16_8_8_16.sv'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|        z_reg        | Flip-flop |  16   |  Y  | N  | N  | N  | N  | N  | N  |
+===============================================================================
+Presto compilation completed successfully.
+1
+###### CLOCKS AND PORTS #######
+set CLK_PORT [get_ports $CLK_NAME]
+{clk}
+set TMP1 [remove_from_collection [all_inputs] $CLK_PORT]
+{reset s_valid m_ready data_in[15] data_in[14] data_in[13] data_in[12] data_in[11] data_in[10] data_in[9] data_in[8] data_in[7] data_in[6] data_in[5] data_in[4] data_in[3] data_in[2] data_in[1] data_in[0]}
+set INPUTS [remove_from_collection $TMP1 $RST_NAME]
+{s_valid m_ready data_in[15] data_in[14] data_in[13] data_in[12] data_in[11] data_in[10] data_in[9] data_in[8] data_in[7] data_in[6] data_in[5] data_in[4] data_in[3] data_in[2] data_in[1] data_in[0]}
+create_clock -period $CLK_PERIOD [get_ports clk]
+1
+# set delay for inputs to be 0.2ns
+set_input_delay 0.2 -max -clock clk $INPUTS
+1
+set_output_delay 0.2 -max -clock clk [all_outputs]
+1
+###### OPTIMIZATION #######
+#####set_max_area 0 
+set high_fanout_net_threshold 0
+0
+###### RUN #####
+compile_ultra
+Information: Performing power optimization. (PWR-850)
+Alib files are up-to-date.
+Information: Evaluating DesignWare library utilization. (UISN-27)
+
+============================================================================
+| DesignWare Building Block Library  |         Version         | Available |
+============================================================================
+| Basic DW Building Blocks           | J-2014.09-DWBB_201409.5.2 |   *     |
+| Licensed DW Building Blocks        | J-2014.09-DWBB_201409.5.2 |   *     |
+============================================================================
+
+Information: Sequential output inversion is enabled.  SVF file must be used for formal verification. (OPT-1208)
+
+Information: There are 76 potential problems in your design. Please run 'check_design' for more information. (LINT-99)
+
+
+Loaded alib file './alib-52/NangateOpenCellLibrary_typical.db.alib'
+  Building model 'DW01_NAND2'
+Information: Ungrouping hierarchy mvma_16_8_1 before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy mvma_16_8_2 before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy mvma_16_8_3 before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy mvma_16_8_4 before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy mvma_16_8_5 before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy mvma_16_8_6 before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy mvma_16_8_7 before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy mvma_16_8_8 before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy mvma_16_8_1/ctrl before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy mvma_16_8_1/dpth before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy mvma_16_8_2/ctrl before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy mvma_16_8_2/dpth before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy mvma_16_8_3/ctrl before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy mvma_16_8_3/dpth before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy mvma_16_8_4/ctrl before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy mvma_16_8_4/dpth before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy mvma_16_8_5/ctrl before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy mvma_16_8_5/dpth before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy mvma_16_8_6/ctrl before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy mvma_16_8_6/dpth before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy mvma_16_8_7/ctrl before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy mvma_16_8_7/dpth before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy mvma_16_8_8/ctrl before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy mvma_16_8_8/dpth before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy mvma_16_8_1/dpth/mem_x before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy mvma_16_8_1/dpth/rom_w before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy mvma_16_8_1/dpth/rom_b before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy mvma_16_8_2/dpth/mem_x before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy mvma_16_8_2/dpth/rom_w before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy mvma_16_8_2/dpth/rom_b before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy mvma_16_8_3/dpth/mem_x before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy mvma_16_8_3/dpth/rom_w before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy mvma_16_8_3/dpth/rom_b before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy mvma_16_8_4/dpth/mem_x before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy mvma_16_8_4/dpth/rom_w before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy mvma_16_8_4/dpth/rom_b before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy mvma_16_8_5/dpth/mem_x before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy mvma_16_8_5/dpth/rom_w before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy mvma_16_8_5/dpth/rom_b before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy mvma_16_8_6/dpth/mem_x before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy mvma_16_8_6/dpth/rom_w before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy mvma_16_8_6/dpth/rom_b before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy mvma_16_8_7/dpth/mem_x before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy mvma_16_8_7/dpth/rom_w before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy mvma_16_8_7/dpth/rom_b before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy mvma_16_8_8/dpth/mem_x before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy mvma_16_8_8/dpth/rom_w before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy mvma_16_8_8/dpth/rom_b before Pass 1 (OPT-776)
+Information: Ungrouping 48 of 49 hierarchies before Pass 1 (OPT-775)
+Information: State dependent leakage is now switched from on to off.
+
+  Beginning Pass 1 Mapping
+  ------------------------
+  Processing 'layer_16_8_8_16'
+Information: Added key list 'DesignWare' to design 'layer_16_8_8_16'. (DDB-72)
+ Implement Synthetic for 'layer_16_8_8_16'.
+
+  Updating timing information
+Information: Updating design information... (UID-85)
+Information: The register 'mvma_16_8_8/ctrl/input_counter_reg[3]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_7/ctrl/input_counter_reg[3]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_7/ctrl/addr_b_reg[0]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_7/ctrl/block_reg[0]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_6/ctrl/input_counter_reg[3]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_6/ctrl/addr_b_reg[1]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_6/ctrl/block_reg[1]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_5/ctrl/input_counter_reg[3]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_5/ctrl/addr_b_reg[1]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_5/ctrl/addr_b_reg[0]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_5/dpth/rom_b/z_reg[4]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_5/ctrl/block_reg[1]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_5/ctrl/block_reg[0]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_4/ctrl/input_counter_reg[3]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_4/ctrl/addr_b_reg[2]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_4/ctrl/block_reg[2]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_3/ctrl/input_counter_reg[3]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_3/ctrl/addr_b_reg[2]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_3/ctrl/addr_b_reg[0]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_3/ctrl/block_reg[2]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_3/ctrl/block_reg[0]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_2/ctrl/input_counter_reg[3]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_2/ctrl/addr_b_reg[2]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_2/ctrl/addr_b_reg[1]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_2/ctrl/block_reg[2]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_2/ctrl/block_reg[1]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_1/ctrl/input_counter_reg[3]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_1/ctrl/addr_b_reg[2]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_1/ctrl/addr_b_reg[1]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_1/ctrl/addr_b_reg[0]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_1/dpth/rom_b/z_reg[3]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_1/dpth/rom_b/z_reg[4]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_1/ctrl/block_reg[2]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_1/ctrl/block_reg[1]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_1/ctrl/block_reg[0]' is a constant and will be removed. (OPT-1206)
+
+  Beginning Mapping Optimizations  (Ultra High effort)
+  -------------------------------
+  Mapping Optimization (Phase 1)
+Information: The register 'mvma_16_8_8/ctrl/block_reg[0]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_8/ctrl/block_reg[1]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_8/ctrl/block_reg[2]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_8/ctrl/addr_b_reg[0]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_8/ctrl/addr_b_reg[1]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_8/ctrl/addr_b_reg[2]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_8/dpth/rom_b/z_reg[6]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_7/ctrl/block_reg[1]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_7/ctrl/block_reg[2]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_7/ctrl/addr_b_reg[1]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_7/ctrl/addr_b_reg[2]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_7/dpth/rom_b/z_reg[6]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_6/ctrl/block_reg[2]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_6/ctrl/addr_b_reg[0]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_6/ctrl/addr_b_reg[2]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_6/dpth/rom_b/z_reg[2]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_6/dpth/rom_b/z_reg[5]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_6/ctrl/block_reg[0]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_5/ctrl/block_reg[2]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_5/ctrl/addr_b_reg[2]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_5/dpth/rom_b/z_reg[1]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_5/dpth/rom_b/z_reg[6]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_4/ctrl/block_reg[0]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_4/ctrl/block_reg[1]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_4/ctrl/addr_b_reg[0]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_4/ctrl/addr_b_reg[1]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_4/dpth/rom_b/z_reg[3]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_4/dpth/rom_b/z_reg[4]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_4/dpth/rom_b/z_reg[0]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_3/ctrl/block_reg[1]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_3/ctrl/addr_b_reg[1]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_3/dpth/rom_b/z_reg[1]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_3/dpth/rom_b/z_reg[5]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_3/dpth/rom_b/z_reg[0]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_3/dpth/rom_b/z_reg[3]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_2/ctrl/block_reg[0]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_2/ctrl/addr_b_reg[0]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_2/dpth/rom_b/z_reg[2]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_2/dpth/rom_b/z_reg[6]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_2/dpth/rom_b/z_reg[5]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_2/dpth/rom_b/z_reg[0]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_8/dpth/rom_b/z_reg[5]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_8/dpth/rom_b/z_reg[4]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_8/dpth/rom_b/z_reg[1]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_8/dpth/rom_b/z_reg[0]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_7/dpth/rom_b/z_reg[5]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_7/dpth/rom_b/z_reg[1]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_6/dpth/rom_b/z_reg[6]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_5/dpth/rom_b/z_reg[15]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_5/dpth/rom_b/z_reg[14]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_5/dpth/rom_b/z_reg[13]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_5/dpth/rom_b/z_reg[12]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_5/dpth/rom_b/z_reg[11]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_5/dpth/rom_b/z_reg[10]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_5/dpth/rom_b/z_reg[9]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_5/dpth/rom_b/z_reg[8]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_5/dpth/rom_b/z_reg[7]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_5/dpth/rom_b/z_reg[2]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_5/dpth/rom_b/z_reg[0]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_4/dpth/rom_b/z_reg[5]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_3/dpth/rom_b/z_reg[15]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_3/dpth/rom_b/z_reg[14]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_3/dpth/rom_b/z_reg[13]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_3/dpth/rom_b/z_reg[12]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_3/dpth/rom_b/z_reg[11]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_3/dpth/rom_b/z_reg[10]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_3/dpth/rom_b/z_reg[9]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_3/dpth/rom_b/z_reg[8]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_3/dpth/rom_b/z_reg[7]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_3/dpth/rom_b/z_reg[2]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_5/ctrl/addr_w_reg[4]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_3/ctrl/addr_w_reg[5]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_2/ctrl/addr_w_reg[5]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_1/ctrl/addr_w_reg[5]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mvma_16_8_1/ctrl/addr_w_reg[4]' is a constant and will be removed. (OPT-1206)
+
+                                  TOTAL                                                
+   ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:00:29   25480.1      0.62     103.4     439.2                           594179.1875
+    0:00:29   25480.1      0.62     103.4     439.2                           594179.1875
+    0:00:29   25480.1      0.62     103.4     439.2                           594179.1875
+    0:00:29   25464.2      0.55      99.0     394.8                           593325.2500
+  Re-synthesis Optimization (Phase 1)
+  Re-synthesis Optimization (Phase 2)
+  Global Optimization (Phase 1)
+  Global Optimization (Phase 2)
+  Global Optimization (Phase 3)
+  Global Optimization (Phase 4)
+  Global Optimization (Phase 5)
+  Global Optimization (Phase 6)
+  Global Optimization (Phase 7)
+  Global Optimization (Phase 8)
+  Global Optimization (Phase 9)
+  Global Optimization (Phase 10)
+  Global Optimization (Phase 11)
+  Global Optimization (Phase 12)
+  Global Optimization (Phase 13)
+  Global Optimization (Phase 14)
+  Global Optimization (Phase 15)
+  Global Optimization (Phase 16)
+  Global Optimization (Phase 17)
+  Global Optimization (Phase 18)
+  Global Optimization (Phase 19)
+  Global Optimization (Phase 20)
+  Global Optimization (Phase 21)
+  Global Optimization (Phase 22)
+  Global Optimization (Phase 23)
+  Global Optimization (Phase 24)
+  Global Optimization (Phase 25)
+  Global Optimization (Phase 26)
+  Global Optimization (Phase 27)
+  Global Optimization (Phase 28)
+  Global Optimization (Phase 29)
+  Global Optimization (Phase 30)
+  Global Optimization (Phase 31)
+  Mapping 'layer_16_8_8_16_DW_mult_uns_8'
+    0:00:37   21968.9      0.19      18.7     375.2                           461431.3125
+
+
+
+  Beginning Delay Optimization Phase
+  ----------------------------------
+
+                                  TOTAL                                                
+   ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:00:37   21968.9      0.19      18.7     375.2                           461431.3125
+    0:00:37   21968.9      0.19      18.7     375.2                           461431.3125
+    0:00:37   21970.0      0.19      18.7     375.2                           461525.0625
+    0:00:38   21970.0      0.19      18.7     375.2                           461525.0625
+    0:00:38   22004.1      0.18      18.3     375.2                           462555.4688
+    0:00:38   22004.1      0.18      18.3     375.2                           462555.4688
+    0:00:38   22004.1      0.18      18.3     375.2                           462555.4688
+    0:00:38   22004.1      0.18      18.3     375.2                           462555.4688
+    0:00:39   22004.1      0.18      18.3     375.2                           462555.4688
+    0:00:39   22004.1      0.18      18.3     375.2                           462555.4688
+    0:00:41   22473.5      0.13      14.9     375.3                           478900.4062
+    0:00:41   22473.5      0.13      14.9     375.3                           478900.4062
+    0:00:41   22473.5      0.13      14.9     375.3                           478900.4062
+
+  Beginning Delay Optimization
+  ----------------------------
+    0:00:41   22473.3      0.14      14.9     375.3                           478893.3438
+    0:00:41   22473.0      0.13      14.9     375.3                           478902.3750
+    0:00:41   22473.0      0.13      14.9     375.3                           478902.3750
+    0:00:41   22473.0      0.13      14.9     375.3                           478902.3750
+    0:00:41   22473.0      0.13      14.9     375.3                           478902.3750
+    0:00:41   22473.0      0.13      14.9     375.3                           478902.3750
+    0:00:41   22473.0      0.13      14.9     375.3                           478902.3750
+    0:00:41   22473.0      0.13      14.9     375.3                           478902.3750
+
+
+  Beginning Design Rule Fixing  (max_capacitance)
+  ----------------------------
+
+                                  TOTAL                                                
+   ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:00:41   22473.0      0.13      14.9     375.3                           478902.3750
+  Global Optimization (Phase 32)
+  Global Optimization (Phase 33)
+  Global Optimization (Phase 34)
+Information: The register 'mvma_16_8_2/ctrl/input_buffer_reg[15]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_2/ctrl/input_buffer_reg[14]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_2/ctrl/input_buffer_reg[13]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_2/ctrl/input_buffer_reg[12]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_2/ctrl/input_buffer_reg[11]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_2/ctrl/input_buffer_reg[10]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_2/ctrl/input_buffer_reg[9]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_2/ctrl/input_buffer_reg[8]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_2/ctrl/input_buffer_reg[7]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_2/ctrl/input_buffer_reg[6]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_2/ctrl/input_buffer_reg[5]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_2/ctrl/input_buffer_reg[4]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_1/ctrl/input_buffer_reg[15]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_1/ctrl/input_buffer_reg[14]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_1/ctrl/input_buffer_reg[13]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_1/ctrl/input_buffer_reg[12]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_1/ctrl/input_buffer_reg[11]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_1/ctrl/input_buffer_reg[10]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_1/ctrl/input_buffer_reg[9]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_1/ctrl/input_buffer_reg[8]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_1/ctrl/input_buffer_reg[7]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_1/ctrl/input_buffer_reg[6]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_1/ctrl/input_buffer_reg[5]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_1/ctrl/input_buffer_reg[4]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_1/ctrl/input_buffer_reg[3]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_1/ctrl/input_buffer_reg[2]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_2/ctrl/input_buffer_reg[3]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_2/ctrl/input_buffer_reg[2]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_4/ctrl/input_buffer_reg[15]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_4/ctrl/input_buffer_reg[14]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_4/ctrl/input_buffer_reg[13]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_4/ctrl/input_buffer_reg[12]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_4/ctrl/input_buffer_reg[11]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_4/ctrl/input_buffer_reg[10]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_4/ctrl/input_buffer_reg[9]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_4/ctrl/input_buffer_reg[8]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_5/ctrl/input_buffer_reg[15]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_5/ctrl/input_buffer_reg[14]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_5/ctrl/input_buffer_reg[13]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_5/ctrl/input_buffer_reg[12]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_5/ctrl/input_buffer_reg[11]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_5/ctrl/input_buffer_reg[10]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_5/ctrl/input_buffer_reg[9]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_5/ctrl/input_buffer_reg[8]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_4/ctrl/input_buffer_reg[7]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_4/ctrl/input_buffer_reg[6]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_4/ctrl/input_buffer_reg[5]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_4/ctrl/input_buffer_reg[4]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_4/ctrl/input_buffer_reg[3]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_4/ctrl/input_buffer_reg[2]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_5/ctrl/input_buffer_reg[7]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_5/ctrl/input_buffer_reg[6]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_5/ctrl/input_buffer_reg[5]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_5/ctrl/input_buffer_reg[4]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_5/ctrl/input_buffer_reg[3]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_5/ctrl/input_buffer_reg[2]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_7/ctrl/input_buffer_reg[15]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_7/ctrl/input_buffer_reg[14]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_7/ctrl/input_buffer_reg[13]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_7/ctrl/input_buffer_reg[12]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_7/ctrl/input_buffer_reg[11]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_7/ctrl/input_buffer_reg[10]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_7/ctrl/input_buffer_reg[9]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_7/ctrl/input_buffer_reg[8]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_7/ctrl/input_buffer_reg[7]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_7/ctrl/input_buffer_reg[6]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_7/ctrl/input_buffer_reg[5]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_7/ctrl/input_buffer_reg[4]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_7/ctrl/input_buffer_reg[3]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_7/ctrl/input_buffer_reg[2]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_1/ctrl/input_buffer_reg[1]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_2/ctrl/input_buffer_reg[1]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_3/ctrl/input_buffer_reg[15]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_3/ctrl/input_buffer_reg[14]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_3/ctrl/input_buffer_reg[13]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_3/ctrl/input_buffer_reg[12]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_3/ctrl/input_buffer_reg[11]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_3/ctrl/input_buffer_reg[10]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_3/ctrl/input_buffer_reg[9]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_3/ctrl/input_buffer_reg[8]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_3/ctrl/input_buffer_reg[7]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_3/ctrl/input_buffer_reg[6]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_3/ctrl/input_buffer_reg[5]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_3/ctrl/input_buffer_reg[4]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_3/ctrl/input_buffer_reg[3]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_3/ctrl/input_buffer_reg[2]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_3/ctrl/input_buffer_reg[1]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_4/ctrl/input_buffer_reg[1]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_5/ctrl/input_buffer_reg[1]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_6/ctrl/input_buffer_reg[15]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_6/ctrl/input_buffer_reg[14]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_6/ctrl/input_buffer_reg[13]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_6/ctrl/input_buffer_reg[12]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_6/ctrl/input_buffer_reg[11]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_6/ctrl/input_buffer_reg[10]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_6/ctrl/input_buffer_reg[9]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_6/ctrl/input_buffer_reg[8]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_6/ctrl/input_buffer_reg[7]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_6/ctrl/input_buffer_reg[6]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_6/ctrl/input_buffer_reg[5]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_6/ctrl/input_buffer_reg[4]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_6/ctrl/input_buffer_reg[3]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_6/ctrl/input_buffer_reg[2]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_6/ctrl/input_buffer_reg[1]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_7/ctrl/input_buffer_reg[1]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_8/ctrl/input_buffer_reg[15]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_8/ctrl/input_buffer_reg[14]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_8/ctrl/input_buffer_reg[13]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_8/ctrl/input_buffer_reg[12]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_8/ctrl/input_buffer_reg[11]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_8/ctrl/input_buffer_reg[10]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_8/ctrl/input_buffer_reg[9]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_8/ctrl/input_buffer_reg[8]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_8/ctrl/input_buffer_reg[7]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_8/ctrl/input_buffer_reg[6]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_8/ctrl/input_buffer_reg[5]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_8/ctrl/input_buffer_reg[4]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_8/ctrl/input_buffer_reg[3]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_8/ctrl/input_buffer_reg[2]' will be removed. (OPT-1207)
+Information: The register 'mvma_16_8_8/ctrl/input_buffer_reg[1]' will be removed. (OPT-1207)
+    0:00:43   21419.9      0.11      12.3       0.0 mvma_16_8_8/dpth/mult_out_reg[15]/D 457098.1250
+    0:00:43   21418.9      0.11      11.9       0.0                           457002.6250
+    0:00:43   21444.1      0.11      11.5       0.0                           457825.5000
+
+                                  TOTAL                                                
+   ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:00:44   21444.1      0.11      11.5       0.0                           457825.5000
+    0:00:44   21441.2      0.11      11.5       0.0                           457723.2500
+
+
+  Beginning Leakage Power Optimization  (max_leakage_power 0)
+  ------------------------------------
+
+                                  TOTAL                                                
+   ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:00:45   21407.7      0.11      10.1       0.0                           456917.4688
+  Global Optimization (Phase 35)
+  Global Optimization (Phase 36)
+  Global Optimization (Phase 37)
+  Global Optimization (Phase 38)
+  Global Optimization (Phase 39)
+  Global Optimization (Phase 40)
+  Global Optimization (Phase 41)
+  Global Optimization (Phase 42)
+  Global Optimization (Phase 43)
+  Global Optimization (Phase 44)
+  Global Optimization (Phase 45)
+  Global Optimization (Phase 46)
+  Global Optimization (Phase 47)
+  Global Optimization (Phase 48)
+  Global Optimization (Phase 49)
+  Global Optimization (Phase 50)
+  Global Optimization (Phase 51)
+  Global Optimization (Phase 52)
+  Global Optimization (Phase 53)
+  Global Optimization (Phase 54)
+  Global Optimization (Phase 55)
+  Global Optimization (Phase 56)
+  Global Optimization (Phase 57)
+  Global Optimization (Phase 58)
+  Global Optimization (Phase 59)
+  Global Optimization (Phase 60)
+    0:00:53   21302.9      0.01       0.4       0.0 mvma_16_8_8/dpth/mult_out_reg[15]/D 449399.8750
+    0:00:54   21308.5      0.01       0.4       0.0                           449592.7500
+    0:00:54   21309.3      0.01       0.4       0.0                           449616.4375
+    0:00:54   21309.3      0.01       0.4       0.0                           449616.4375
+    0:00:55   21303.4      0.01       0.3       0.0                           449077.9688
+    0:00:55   21303.4      0.01       0.3       0.0                           449077.9688
+    0:00:56   21303.4      0.01       0.3       0.0                           449077.9688
+    0:00:56   21303.4      0.01       0.3       0.0                           449077.9688
+    0:00:56   21303.4      0.01       0.3       0.0                           449088.1875
+    0:00:56   21303.4      0.01       0.3       0.0                           449088.1875
+    0:00:56   21303.4      0.01       0.3       0.0                           449088.1875
+    0:00:56   21303.4      0.01       0.3       0.0                           449088.1875
+    0:00:57   21392.3      0.01       0.1       0.0                           452104.1562
+    0:00:57   21392.3      0.01       0.1       0.0                           452104.1562
+    0:00:58   21392.3      0.01       0.1       0.0                           452104.1562
+    0:00:58   21392.3      0.01       0.1       0.0                           452104.1562
+    0:00:58   21392.3      0.01       0.1       0.0                           452104.1562
+    0:00:58   21392.3      0.01       0.1       0.0                           452104.1562
+    0:00:58   21392.3      0.01       0.1       0.0                           452104.1562
+    0:00:58   21392.3      0.01       0.1       0.0                           452104.1562
+    0:00:58   21392.3      0.01       0.1       0.0                           452104.1562
+    0:00:58   21392.3      0.01       0.1       0.0                           452104.1562
+    0:00:58   21392.3      0.01       0.1       0.0                           452104.1562
+
+                                  TOTAL                                                
+   ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:00:59   21392.3      0.01       0.1       0.0                           452104.1562
+    0:01:00   21288.5      0.01       0.2       0.0                           446632.0625
+    0:01:00   21289.0      0.01       0.2       0.0                           446696.7812
+    0:01:00   21289.0      0.01       0.2       0.0                           446696.7812
+    0:01:01   21287.7      0.01       0.2       0.0                           446693.0938
+    0:01:01   21226.0      0.01       0.2       0.0                           445383.7812
+    0:01:01   21237.7      0.01       0.1       0.0                           445832.5938
+    0:01:02   21230.5      0.01       0.1       0.0                           445397.3438
+Loading db file '/home/home4/pmilder/ese507/synthesis/lib/NangateOpenCellLibrary_typical.db'
+
+
+Note: Symbol # after min delay cost means estimated hold TNS across all active scenarios 
+
+
+  Optimization Complete
+  ---------------------
+Information: State dependent leakage is now switched from off to on.
+Information: Propagating switching activity (low effort zero delay simulation). (PWR-6)
+1
+report_area
+ 
+****************************************
+Report : area
+Design : layer_16_8_8_16
+Version: J-2014.09-SP5-2
+Date   : Fri Dec  8 20:46:03 2017
+****************************************
+
+Information: Updating design information... (UID-85)
+Library(s) Used:
+
+    NangateOpenCellLibrary (File: /home/home4/pmilder/ese507/synthesis/lib/NangateOpenCellLibrary_typical.db)
+
+Number of ports:                           38
+Number of nets:                         13888
+Number of cells:                        13141
+Number of combinational cells:          11203
+Number of sequential cells:              1938
+Number of macros/black boxes:               0
+Number of buf/inv:                       2432
+Number of references:                      50
+
+Combinational area:              12461.302062
+Buf/Inv area:                     1350.748009
+Noncombinational area:            8769.221683
+Macro/Black Box area:                0.000000
+Net Interconnect area:      undefined  (Wire load has zero net area)
+
+Total cell area:                 21230.523745
+Total area:                 undefined
+1
+report_power
+ 
+****************************************
+Report : power
+        -analysis_effort low
+Design : layer_16_8_8_16
+Version: J-2014.09-SP5-2
+Date   : Fri Dec  8 20:46:03 2017
+****************************************
+
+
+Library(s) Used:
+
+    NangateOpenCellLibrary (File: /home/home4/pmilder/ese507/synthesis/lib/NangateOpenCellLibrary_typical.db)
+
+
+Operating Conditions: typical   Library: NangateOpenCellLibrary
+Wire Load Model Mode: top
+
+Design        Wire Load Model            Library
+------------------------------------------------
+layer_16_8_8_16        5K_hvratio_1_1    NangateOpenCellLibrary
+
+
+Global Operating Voltage = 1.1  
+Power-specific unit information :
+    Voltage Units = 1V
+    Capacitance Units = 1.000000ff
+    Time Units = 1ns
+    Dynamic Power Units = 1uW    (derived from V,C,T units)
+    Leakage Power Units = 1nW
+
+
+  Cell Internal Power  =  11.9722 mW   (83%)
+  Net Switching Power  =   2.4440 mW   (17%)
+                         ---------
+Total Dynamic Power    =  14.4162 mW  (100%)
+
+Cell Leakage Power     = 451.3235 uW
+
+
+                 Internal         Switching           Leakage            Total
+Power Group      Power            Power               Power              Power   (   %    )  Attrs
+--------------------------------------------------------------------------------------------------
+io_pad             0.0000            0.0000            0.0000            0.0000  (   0.00%)
+memory             0.0000            0.0000            0.0000            0.0000  (   0.00%)
+black_box          0.0000            0.0000            0.0000            0.0000  (   0.00%)
+clock_network      0.0000            0.0000            0.0000            0.0000  (   0.00%)
+register       1.0121e+04          384.0612        1.5231e+05        1.0658e+04  (  71.68%)
+sequential         0.0000            0.0000            0.0000            0.0000  (   0.00%)
+combinational  1.8511e+03        2.0600e+03        2.9901e+05        4.2100e+03  (  28.32%)
+--------------------------------------------------------------------------------------------------
+Total          1.1972e+04 uW     2.4440e+03 uW     4.5132e+05 nW     1.4868e+04 uW
+1
+report_timing
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+Design : layer_16_8_8_16
+Version: J-2014.09-SP5-2
+Date   : Fri Dec  8 20:46:03 2017
+****************************************
+
+Operating Conditions: typical   Library: NangateOpenCellLibrary
+Wire Load Model Mode: top
+
+  Startpoint: mvma_16_8_5/dpth/mem_x/data_out_reg[3]
+              (rising edge-triggered flip-flop clocked by clk)
+  Endpoint: mvma_16_8_5/dpth/mult_out_reg[15]
+            (rising edge-triggered flip-flop clocked by clk)
+  Path Group: clk
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  layer_16_8_8_16    5K_hvratio_1_1        NangateOpenCellLibrary
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock clk (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             0.00       0.00
+  mvma_16_8_5/dpth/mem_x/data_out_reg[3]/CK (DFF_X1)      0.00       0.00 r
+  mvma_16_8_5/dpth/mem_x/data_out_reg[3]/Q (DFF_X1)       0.10       0.10 r
+  U7993/Z (BUF_X4)                                        0.07       0.17 r
+  U9302/ZN (XNOR2_X1)                                     0.08       0.25 r
+  U9334/ZN (OAI22_X1)                                     0.04       0.29 f
+  U9347/S (FA_X1)                                         0.14       0.43 r
+  U9335/ZN (XNOR2_X1)                                     0.06       0.49 r
+  U9337/ZN (XNOR2_X1)                                     0.06       0.55 r
+  U9370/S (FA_X1)                                         0.12       0.67 f
+  U9340/ZN (NOR2_X1)                                      0.05       0.72 r
+  U9343/ZN (OAI21_X1)                                     0.03       0.75 f
+  U10787/ZN (AOI21_X1)                                    0.04       0.79 r
+  U10788/ZN (OAI21_X1)                                    0.04       0.83 f
+  U10833/ZN (XNOR2_X1)                                    0.05       0.88 f
+  U10834/ZN (NOR2_X1)                                     0.03       0.91 r
+  mvma_16_8_5/dpth/mult_out_reg[15]/D (DFF_X1)            0.01       0.92 r
+  data arrival time                                                  0.92
+
+  clock clk (rise edge)                                   0.95       0.95
+  clock network delay (ideal)                             0.00       0.95
+  mvma_16_8_5/dpth/mult_out_reg[15]/CK (DFF_X1)           0.00       0.95 r
+  library setup time                                     -0.03       0.92
+  data required time                                                 0.92
+  --------------------------------------------------------------------------
+  data required time                                                 0.92
+  data arrival time                                                 -0.92
+  --------------------------------------------------------------------------
+  slack (MET)                                                        0.00
+
+
+1
+write -f verilog $TOP_MOD_NAME -output gates.v -hierarchy
+Writing verilog file '/home/home5/rrubio/rrubio_ese507work/proj3/part1/gates.v'.
+1
+quit
+
+Thank you...

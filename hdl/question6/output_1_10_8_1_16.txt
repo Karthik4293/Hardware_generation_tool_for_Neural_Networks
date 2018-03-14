@@ -1,0 +1,712 @@
+
+                      Design Compiler Graphical
+                            DC Ultra (TM)
+                             DFTMAX (TM)
+                         Power Compiler (TM)
+                           DesignWare (R)
+                           DC Expert (TM)
+                         Design Vision (TM)
+                          HDL Compiler (TM)
+                         VHDL Compiler (TM)
+                            DFT Compiler
+                        Library Compiler (TM)
+                         Design Compiler(R)
+
+         Version J-2014.09-SP5-2 for RHEL64 -- Jul 11, 2015
+               Copyright (c) 1988-2015 Synopsys, Inc.
+
+This software and the associated documentation are confidential and 
+proprietary to Synopsys, Inc. Your use or disclosure of this software 
+is subject to the terms and conditions of a written license agreement 
+between you, or your company, and Synopsys, Inc.
+
+Initializing...
+##############################################
+# Setup: fill out the following parameters: name of clock signal, clock period (ns),
+# reset signal name (if used), name of top-level module, name of source file
+set CLK_NAME "clk";
+clk
+set CLK_PERIOD 1.53;
+1.53
+set RST_NAME "reset";
+reset
+set TOP_MOD_NAME "layer_10_8_1_16";
+layer_10_8_1_16
+set SRC_FILE "layer_10_8_1_16.sv";
+layer_10_8_1_16.sv
+###############################################
+source setupdc.tcl
+NangateOpenCellLibrary_typical.db dw_foundation.sldb
+file mkdir work_synth
+define_design_lib WORK -path work_synth
+1
+analyze $SRC_FILE -format sverilog
+Running PRESTO HDLC
+Searching for ./layer_10_8_1_16.sv
+Compiling source file ./layer_10_8_1_16.sv
+Presto compilation completed successfully.
+Loading db file '/home/home4/pmilder/ese507/synthesis/lib/NangateOpenCellLibrary_typical.db'
+Loading db file '/usr/local/synopsys/syn/libraries/syn/dw_foundation.sldb'
+1
+elaborate -work WORK $TOP_MOD_NAME
+Loading db file '/usr/local/synopsys/syn/libraries/syn/gtech.db'
+Loading db file '/usr/local/synopsys/syn/libraries/syn/standard.sldb'
+  Loading link library 'NangateOpenCellLibrary'
+  Loading link library 'gtech'
+Running PRESTO HDLC
+
+Inferred memory devices in process
+	in routine layer_10_8_1_16 line 18 in file
+		'./layer_10_8_1_16.sv'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|    out_count_reg    | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+===============================================================================
+Presto compilation completed successfully.
+Elaborated 1 design.
+Current design is now 'layer_10_8_1_16'.
+Information: Building the design 'mvma' instantiated from design 'layer_10_8_1_16' with
+	the parameters "rank=0". (HDL-193)
+Presto compilation completed successfully.
+Information: Building the design 'control' instantiated from design 'mvma_rank0' with
+	the parameters "rank=0". (HDL-193)
+
+Inferred memory devices in process
+	in routine control_rank0 line 82 in file
+		'./layer_10_8_1_16.sv'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|  input_buffer_reg   | Flip-flop |  16   |  Y  | N  | N  | N  | N  | N  | N  |
+|     s_ready_reg     | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|     addr_x_reg      | Flip-flop |   3   |  Y  | N  | N  | N  | N  | N  | N  |
+|     addr_w_reg      | Flip-flop |   7   |  Y  | N  | N  | N  | N  | N  | N  |
+|     addr_b_reg      | Flip-flop |   4   |  Y  | N  | N  | N  | N  | N  | N  |
+|    accum_src_reg    | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|    computing_reg    | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|  input_counter_reg  | Flip-flop |   4   |  Y  | N  | N  | N  | N  | N  | N  |
+| output_counter_reg  | Flip-flop |   4   |  Y  | N  | N  | N  | N  | N  | N  |
+|    accum_en_reg     | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|     m_valid_reg     | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+|      block_reg      | Flip-flop |   5   |  Y  | N  | N  | N  | N  | N  | N  |
+|      count_reg      | Flip-flop |   4   |  Y  | N  | N  | N  | N  | N  | N  |
+|        c_reg        | Flip-flop |   2   |  Y  | N  | N  | N  | N  | N  | N  |
+|      temp_reg       | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
+===============================================================================
+Presto compilation completed successfully.
+Information: Building the design 'datapath'. (HDL-193)
+
+Inferred memory devices in process
+	in routine datapath line 360 in file
+		'./layer_10_8_1_16.sv'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|    mult_out_reg     | Flip-flop |  16   |  Y  | N  | N  | N  | N  | N  | N  |
+|    data_out_reg     | Flip-flop |  16   |  Y  | N  | N  | N  | N  | N  | N  |
+===============================================================================
+Presto compilation completed successfully.
+Information: Building the design 'memory' instantiated from design 'datapath' with
+	the parameters "16,8,3". (HDL-193)
+
+Inferred memory devices in process
+	in routine memory_WIDTH16_SIZE8_LOGSIZE3 line 213 in file
+		'./layer_10_8_1_16.sv'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|    data_out_reg     | Flip-flop |  16   |  Y  | N  | N  | N  | N  | N  | N  |
+|       mem_reg       | Flip-flop |  16   |  Y  | N  | N  | N  | N  | N  | N  |
+|       mem_reg       | Flip-flop |  16   |  Y  | N  | N  | N  | N  | N  | N  |
+|       mem_reg       | Flip-flop |  16   |  Y  | N  | N  | N  | N  | N  | N  |
+|       mem_reg       | Flip-flop |  16   |  Y  | N  | N  | N  | N  | N  | N  |
+|       mem_reg       | Flip-flop |  16   |  Y  | N  | N  | N  | N  | N  | N  |
+|       mem_reg       | Flip-flop |  16   |  Y  | N  | N  | N  | N  | N  | N  |
+|       mem_reg       | Flip-flop |  16   |  Y  | N  | N  | N  | N  | N  | N  |
+|       mem_reg       | Flip-flop |  16   |  Y  | N  | N  | N  | N  | N  | N  |
+===============================================================================
+Statistics for MUX_OPs
+============================================================================
+|         block name/line           | Inputs | Outputs | # sel inputs | MB |
+============================================================================
+| memory_WIDTH16_SIZE8_LOGSIZE3/214 |   8    |   16    |      3       | N  |
+============================================================================
+Presto compilation completed successfully.
+Information: Building the design 'layer_10_8_1_16_W_rom'. (HDL-193)
+Warning:  ./layer_10_8_1_16.sv:230: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_10_8_1_16.sv:232: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_10_8_1_16.sv:235: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_10_8_1_16.sv:238: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_10_8_1_16.sv:240: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_10_8_1_16.sv:242: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_10_8_1_16.sv:243: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_10_8_1_16.sv:247: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_10_8_1_16.sv:250: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_10_8_1_16.sv:251: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_10_8_1_16.sv:253: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_10_8_1_16.sv:255: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_10_8_1_16.sv:256: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_10_8_1_16.sv:260: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_10_8_1_16.sv:265: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_10_8_1_16.sv:267: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_10_8_1_16.sv:268: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_10_8_1_16.sv:269: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_10_8_1_16.sv:270: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_10_8_1_16.sv:271: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_10_8_1_16.sv:273: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_10_8_1_16.sv:276: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_10_8_1_16.sv:280: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_10_8_1_16.sv:283: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_10_8_1_16.sv:284: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_10_8_1_16.sv:286: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_10_8_1_16.sv:287: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_10_8_1_16.sv:288: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_10_8_1_16.sv:289: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_10_8_1_16.sv:290: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_10_8_1_16.sv:295: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_10_8_1_16.sv:296: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_10_8_1_16.sv:297: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_10_8_1_16.sv:302: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_10_8_1_16.sv:303: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_10_8_1_16.sv:304: unsigned to signed assignment occurs. (VER-318)
+
+Statistics for case statements in always block at line 224 in file
+	'./layer_10_8_1_16.sv'
+===============================================
+|           Line           |  full/ parallel  |
+===============================================
+|           225            |     no/auto      |
+===============================================
+
+Inferred memory devices in process
+	in routine layer_10_8_1_16_W_rom line 224 in file
+		'./layer_10_8_1_16.sv'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|        z_reg        | Flip-flop |  16   |  Y  | N  | N  | N  | N  | N  | N  |
+===============================================================================
+Presto compilation completed successfully.
+Information: Building the design 'layer_10_8_1_16_B_rom'. (HDL-193)
+Warning:  ./layer_10_8_1_16.sv:317: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_10_8_1_16.sv:320: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_10_8_1_16.sv:322: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./layer_10_8_1_16.sv:324: unsigned to signed assignment occurs. (VER-318)
+
+Statistics for case statements in always block at line 314 in file
+	'./layer_10_8_1_16.sv'
+===============================================
+|           Line           |  full/ parallel  |
+===============================================
+|           315            |     no/auto      |
+===============================================
+
+Inferred memory devices in process
+	in routine layer_10_8_1_16_B_rom line 314 in file
+		'./layer_10_8_1_16.sv'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|        z_reg        | Flip-flop |  16   |  Y  | N  | N  | N  | N  | N  | N  |
+===============================================================================
+Presto compilation completed successfully.
+1
+###### CLOCKS AND PORTS #######
+set CLK_PORT [get_ports $CLK_NAME]
+{clk}
+set TMP1 [remove_from_collection [all_inputs] $CLK_PORT]
+{reset s_valid m_ready data_in[15] data_in[14] data_in[13] data_in[12] data_in[11] data_in[10] data_in[9] data_in[8] data_in[7] data_in[6] data_in[5] data_in[4] data_in[3] data_in[2] data_in[1] data_in[0]}
+set INPUTS [remove_from_collection $TMP1 $RST_NAME]
+{s_valid m_ready data_in[15] data_in[14] data_in[13] data_in[12] data_in[11] data_in[10] data_in[9] data_in[8] data_in[7] data_in[6] data_in[5] data_in[4] data_in[3] data_in[2] data_in[1] data_in[0]}
+create_clock -period $CLK_PERIOD [get_ports clk]
+1
+# set delay for inputs to be 0.2ns
+set_input_delay 0.2 -max -clock clk $INPUTS
+1
+set_output_delay 0.2 -max -clock clk [all_outputs]
+1
+###### OPTIMIZATION #######
+set_max_area 0 
+1
+###### RUN #####
+compile
+Information: Checking out the license 'DesignWare'. (SEC-104)
+Information: Evaluating DesignWare library utilization. (UISN-27)
+
+============================================================================
+| DesignWare Building Block Library  |         Version         | Available |
+============================================================================
+| Basic DW Building Blocks           | J-2014.09-DWBB_201409.5.2 |   *     |
+| Licensed DW Building Blocks        | J-2014.09-DWBB_201409.5.2 |   *     |
+============================================================================
+
+
+Information: There are 14 potential problems in your design. Please run 'check_design' for more information. (LINT-99)
+
+
+
+  Beginning Pass 1 Mapping
+  ------------------------
+  Processing 'layer_10_8_1_16_B_rom'
+  Processing 'layer_10_8_1_16_W_rom'
+  Processing 'memory_WIDTH16_SIZE8_LOGSIZE3'
+  Processing 'datapath'
+Information: Added key list 'DesignWare' to design 'datapath'. (DDB-72)
+  Processing 'control_rank0'
+Information: Added key list 'DesignWare' to design 'control_rank0'. (DDB-72)
+  Processing 'mvma_rank0'
+  Processing 'layer_10_8_1_16'
+
+  Updating timing information
+Information: Updating design information... (UID-85)
+
+  Beginning Implementation Selection
+  ----------------------------------
+  Mapping 'datapath_DW_cmp_0'
+  Processing 'datapath_DW01_add_0'
+  Processing 'control_rank0_DW01_add_0'
+  Processing 'control_rank0_DW01_inc_0'
+  Processing 'control_rank0_DW01_inc_1'
+  Processing 'control_rank0_DW01_cmp2_0'
+  Processing 'control_rank0_DW_div_uns_0'
+  Mapping 'DW01_add'
+  Mapping 'DW01_add'
+  Mapping 'DW01_add'
+  Mapping 'DW01_add'
+  Mapping 'DW01_add'
+  Mapping 'DW01_add'
+  Mapping 'DW01_add'
+  Mapping 'DW01_add'
+  Mapping 'DW01_add'
+  Mapping 'DW01_add'
+  Mapping 'DW01_add'
+  Mapping 'DW01_add'
+  Mapping 'DW01_add'
+  Mapping 'DW01_add'
+  Mapping 'DW01_add'
+  Mapping 'datapath_DW_mult_tc_0'
+  Processing 'DW01_inc_width2'
+  Mapping 'DW_mult_uns'
+Information: Added key list 'DesignWare' to design 'dp_cluster_0_2'. (DDB-72)
+  Processing 'DW01_inc_width4'
+  Mapping 'control_rank0_DW_mult_uns_0'
+
+  Beginning Mapping Optimizations  (Medium effort)
+  -------------------------------
+  Allocating blocks in 'DW_div_uns_a_width16_b_width4'
+  Allocating blocks in 'DW_div_a_width16_b_width4_tc_mode0_rem_mode1'
+  Allocating blocks in 'DW_div_a_width16_b_width4_tc_mode0_rem_mode1'
+  Allocating blocks in 'DW_div_uns_a_width16_b_width4'
+  Allocating blocks in 'DW_div_a_width16_b_width4_tc_mode0_rem_mode1'
+  Mapping Optimization (Phase 1)
+  Selecting implementations
+  Structuring 'control_rank0_DW_div_uns_2'
+  Mapping 'control_rank0_DW_div_uns_2'
+  Structuring 'control_rank0_DW_div_uns_3'
+  Mapping 'control_rank0_DW_div_uns_3'
+  Structuring 'control_rank0_DW_div_uns_4'
+  Mapping 'control_rank0_DW_div_uns_4'
+  Structuring 'control_rank0_DW_div_uns_5'
+  Mapping 'control_rank0_DW_div_uns_5'
+  Allocating blocks in 'DW_div_uns_a_width16_b_width4'
+  Allocating blocks in 'DW_div_a_width16_b_width4_tc_mode0_rem_mode1'
+  Structuring 'control_rank0_DW_div_uns_6'
+  Mapping 'control_rank0_DW_div_uns_6'
+  Structuring 'control_rank0_DW_div_uns_7'
+  Mapping 'control_rank0_DW_div_uns_7'
+
+                                  TOTAL                                      
+   ELAPSED            WORST NEG   SETUP    DESIGN                            
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT         
+  --------- --------- --------- --------- --------- -------------------------
+    0:00:23    4271.7      0.44      10.9      13.5                          
+    0:00:23    4270.6      0.43      10.9      13.5                          
+    0:00:23    4270.6      0.43      10.9      13.5                          
+    0:00:23    4269.8      0.42      10.8      13.5                          
+    0:00:23    4269.8      0.42      10.8      13.5                          
+    0:00:24    3595.0      0.39       9.3      13.5                          
+    0:00:24    3605.4      0.36       9.0      13.5                          
+    0:00:24    3607.5      0.36       9.0      13.5                          
+    0:00:24    3597.6      0.36       9.0      13.5                          
+    0:00:24    3599.5      0.34       8.2      13.5                          
+    0:00:24    3604.3      0.34       7.9      13.5                          
+    0:00:24    3607.8      0.34       7.7      13.5                          
+    0:00:24    3614.1      0.32       7.5      13.5                          
+    0:00:24    3618.4      0.32       7.4      13.5                          
+    0:00:24    3621.9      0.31       7.3      13.5                          
+    0:00:24    3623.5      0.29       7.2      13.5                          
+    0:00:24    3626.6      0.29       7.2      13.5                          
+    0:00:24    3627.2      0.29       7.1      13.5                          
+    0:00:24    3627.2      0.29       7.1      13.5                          
+    0:00:24    3627.2      0.29       7.1      13.5                          
+    0:00:24    3628.0      0.29       7.1       0.0                          
+    0:00:24    3628.0      0.29       7.1       0.0                          
+    0:00:24    3628.0      0.29       7.1       0.0                          
+    0:00:24    3628.0      0.29       7.1       0.0                          
+
+
+
+  Beginning Delay Optimization Phase
+  ----------------------------------
+
+                                  TOTAL                                      
+   ELAPSED            WORST NEG   SETUP    DESIGN                            
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT         
+  --------- --------- --------- --------- --------- -------------------------
+    0:00:24    3628.0      0.29       7.1       0.0                          
+    0:00:25    3642.3      0.27       6.7       0.0 mvma_10_8_1/dpth/mult_out_reg[15]/D
+    0:00:25    3655.9      0.25       6.2       0.0 mvma_10_8_1/dpth/mult_out_reg[15]/D
+    0:00:25    3661.0      0.23       5.9       0.0 mvma_10_8_1/dpth/mult_out_reg[15]/D
+    0:00:25    3666.8      0.21       5.2       0.0 mvma_10_8_1/ctrl/input_counter_reg[1]/D
+    0:00:25    3672.7      0.20       5.1       0.0 mvma_10_8_1/dpth/mult_out_reg[15]/D
+    0:00:25    3675.6      0.20       4.9       0.0 mvma_10_8_1/ctrl/input_counter_reg[1]/D
+    0:00:25    3680.6      0.19       4.7       0.0 mvma_10_8_1/ctrl/input_counter_reg[1]/D
+    0:00:25    3683.0      0.19       4.7       0.0 mvma_10_8_1/dpth/mult_out_reg[15]/D
+    0:00:25    3685.7      0.19       4.2       0.0 mvma_10_8_1/ctrl/input_counter_reg[1]/D
+    0:00:25    3691.3      0.18       4.1       0.0 mvma_10_8_1/dpth/mult_out_reg[15]/D
+    0:00:25    3692.6      0.17       4.1       0.0 mvma_10_8_1/ctrl/input_counter_reg[1]/D
+    0:00:25    3691.3      0.17       3.6       0.0 mvma_10_8_1/ctrl/input_counter_reg[1]/D
+    0:00:25    3692.3      0.16       3.6       0.0 mvma_10_8_1/ctrl/input_counter_reg[1]/D
+    0:00:25    3696.3      0.16       3.5       0.0 mvma_10_8_1/ctrl/input_counter_reg[1]/D
+    0:00:25    3702.5      0.15       3.4       0.0 mvma_10_8_1/ctrl/input_counter_reg[1]/D
+    0:00:25    3703.0      0.14       3.4       0.0 mvma_10_8_1/ctrl/input_counter_reg[1]/D
+    0:00:25    3708.0      0.14       3.1       0.0 mvma_10_8_1/ctrl/input_counter_reg[1]/D
+    0:00:26    3711.8      0.14       3.1       0.0 mvma_10_8_1/ctrl/input_counter_reg[1]/D
+    0:00:26    3712.6      0.13       3.1       0.0 mvma_10_8_1/ctrl/input_counter_reg[1]/D
+    0:00:26    3717.1      0.13       3.0       0.0 mvma_10_8_1/dpth/data_out_reg[15]/D
+    0:00:26    3720.3      0.12       2.7       0.0 mvma_10_8_1/ctrl/input_counter_reg[1]/D
+    0:00:26    3721.9      0.12       2.7       0.0 mvma_10_8_1/dpth/mult_out_reg[15]/D
+    0:00:26    3722.7      0.12       2.6       0.0 mvma_10_8_1/ctrl/input_counter_reg[1]/D
+    0:00:26    3723.7      0.11       2.6       0.0 mvma_10_8_1/ctrl/input_counter_reg[1]/D
+    0:00:26    3724.5      0.11       2.6       0.0 mvma_10_8_1/ctrl/input_counter_reg[1]/D
+    0:00:26    3728.5      0.11       2.6       0.0 mvma_10_8_1/ctrl/input_counter_reg[1]/D
+    0:00:26    3729.9      0.11       2.6       0.0 mvma_10_8_1/dpth/data_out_reg[11]/D
+    0:00:26    3733.3      0.11       2.5       0.0 mvma_10_8_1/dpth/mult_out_reg[15]/D
+    0:00:26    3741.6      0.10       2.4       0.0 mvma_10_8_1/ctrl/input_counter_reg[1]/D
+    0:00:26    3743.4      0.10       2.3       0.0 mvma_10_8_1/ctrl/input_counter_reg[1]/D
+    0:00:26    3745.3      0.10       2.3       0.0 mvma_10_8_1/dpth/mult_out_reg[15]/D
+    0:00:26    3752.2      0.09       2.0       0.0 mvma_10_8_1/dpth/data_out_reg[1]/D
+    0:00:26    3766.6      0.08       1.9       0.0 mvma_10_8_1/ctrl/input_counter_reg[1]/D
+    0:00:26    3767.1      0.08       1.9       0.0 mvma_10_8_1/ctrl/input_counter_reg[2]/D
+    0:00:26    3769.5      0.08       1.9       0.0 mvma_10_8_1/ctrl/input_counter_reg[2]/D
+    0:00:27    3769.0      0.08       1.9       0.0 mvma_10_8_1/ctrl/input_counter_reg[2]/D
+    0:00:27    3774.5      0.08       1.7       0.0 mvma_10_8_1/dpth/data_out_reg[1]/D
+    0:00:27    3779.6      0.07       1.7       0.0 mvma_10_8_1/ctrl/input_counter_reg[2]/D
+    0:00:27    3778.3      0.07       1.7       0.0 mvma_10_8_1/dpth/mult_out_reg[15]/D
+    0:00:27    3783.1      0.07       1.6       0.0 mvma_10_8_1/dpth/mult_out_reg[15]/D
+    0:00:27    3788.1      0.07       1.4       0.0 mvma_10_8_1/ctrl/input_counter_reg[2]/D
+    0:00:27    3792.4      0.06       1.3       0.0 mvma_10_8_1/dpth/mult_out_reg[15]/D
+    0:00:27    3795.6      0.06       1.2       0.0 mvma_10_8_1/dpth/data_out_reg[1]/D
+    0:00:27    3794.8      0.06       1.2       0.0 mvma_10_8_1/dpth/mult_out_reg[15]/D
+    0:00:27    3797.9      0.06       1.2       0.0 mvma_10_8_1/ctrl/addr_x_reg[2]/D
+    0:00:27    3798.7      0.05       1.1       0.0 mvma_10_8_1/dpth/data_out_reg[1]/D
+    0:00:27    3803.8      0.05       0.9       0.0 mvma_10_8_1/dpth/mult_out_reg[15]/D
+    0:00:27    3804.1      0.05       0.9       0.0 mvma_10_8_1/ctrl/input_counter_reg[2]/D
+    0:00:27    3805.9      0.05       0.9       0.0 mvma_10_8_1/dpth/mult_out_reg[15]/D
+    0:00:27    3805.9      0.04       0.9       0.0 mvma_10_8_1/ctrl/input_counter_reg[2]/D
+    0:00:27    3807.5      0.04       0.9       0.0 mvma_10_8_1/dpth/mult_out_reg[15]/D
+    0:00:27    3809.7      0.04       0.8       0.0 mvma_10_8_1/ctrl/input_counter_reg[2]/D
+    0:00:28    3816.8      0.04       0.8       0.0 mvma_10_8_1/dpth/mult_out_reg[15]/D
+    0:00:28    3819.2      0.04       0.8       0.0 mvma_10_8_1/dpth/mult_out_reg[15]/D
+    0:00:28    3824.3      0.03       0.7       0.0 mvma_10_8_1/ctrl/input_counter_reg[2]/D
+    0:00:28    3825.6      0.03       0.6       0.0 mvma_10_8_1/ctrl/input_counter_reg[0]/D
+    0:00:28    3827.7      0.03       0.6       0.0 mvma_10_8_1/ctrl/input_counter_reg[2]/D
+    0:00:28    3829.3      0.03       0.5       0.0 mvma_10_8_1/ctrl/input_counter_reg[0]/D
+    0:00:28    3830.7      0.03       0.5       0.0 mvma_10_8_1/ctrl/input_counter_reg[0]/D
+    0:00:28    3833.9      0.03       0.5       0.0 mvma_10_8_1/ctrl/input_counter_reg[0]/D
+    0:00:28    3835.5      0.03       0.5       0.0 mvma_10_8_1/ctrl/input_counter_reg[0]/D
+    0:00:28    3839.4      0.02       0.4       0.0 mvma_10_8_1/dpth/data_out_reg[1]/D
+    0:00:28    3841.0      0.02       0.4       0.0 mvma_10_8_1/ctrl/input_counter_reg[2]/D
+    0:00:28    3840.8      0.02       0.4       0.0 mvma_10_8_1/ctrl/input_counter_reg[0]/D
+    0:00:28    3840.2      0.02       0.4       0.0                          
+    0:00:29    3840.0      0.02       0.4       0.0 mvma_10_8_1/ctrl/input_counter_reg[0]/D
+    0:00:29    3838.9      0.02       0.4       0.0                          
+    0:00:29    3834.7      0.02       0.3       0.0                          
+    0:00:29    3836.3      0.02       0.3       0.0 mvma_10_8_1/dpth/mult_out_reg[15]/D
+    0:00:30    3834.7      0.02       0.3       0.0 mvma_10_8_1/dpth/mult_out_reg[15]/D
+    0:00:30    3835.5      0.02       0.3       0.0 mvma_10_8_1/ctrl/input_counter_reg[2]/D
+    0:00:30    3837.6      0.02       0.3       0.0 mvma_10_8_1/dpth/mult_out_reg[15]/D
+    0:00:30    3838.4      0.02       0.3       0.0 mvma_10_8_1/ctrl/input_counter_reg[0]/D
+    0:00:30    3841.6      0.02       0.3       0.0 mvma_10_8_1/dpth/mult_out_reg[15]/D
+    0:00:30    3842.4      0.02       0.3       0.0 mvma_10_8_1/dpth/mult_out_reg[15]/D
+    0:00:30    3846.1      0.02       0.3       0.0 mvma_10_8_1/ctrl/input_counter_reg[2]/D
+    0:00:30    3846.4      0.02       0.3       0.0 mvma_10_8_1/dpth/mult_out_reg[15]/D
+    0:00:30    3846.4      0.02       0.3       0.0 mvma_10_8_1/dpth/mult_out_reg[15]/D
+    0:00:30    3846.9      0.01       0.3       0.0 mvma_10_8_1/ctrl/input_counter_reg[0]/D
+    0:00:30    3851.7      0.01       0.3       0.0                          
+    0:00:31    3851.7      0.01       0.3       0.0                          
+    0:00:31    3852.5      0.01       0.2       0.0                          
+
+
+  Beginning Area-Recovery Phase  (max_area 0)
+  -----------------------------
+
+                                  TOTAL                                      
+   ELAPSED            WORST NEG   SETUP    DESIGN                            
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT         
+  --------- --------- --------- --------- --------- -------------------------
+    0:00:31    3852.5      0.01       0.2       0.0                          
+    0:00:31    3852.5      0.01       0.2       0.0                          
+    0:00:31    3830.4      0.01       0.2       0.0                          
+    0:00:31    3820.8      0.01       0.2       0.0                          
+    0:00:31    3817.4      0.02       0.2       0.0                          
+    0:00:31    3816.3      0.02       0.2       0.0                          
+    0:00:31    3815.8      0.02       0.2       0.0                          
+    0:00:31    3815.8      0.02       0.2       0.0                          
+    0:00:31    3816.3      0.01       0.2       0.0 mvma_10_8_1/ctrl/input_counter_reg[2]/D
+    0:00:31    3816.3      0.01       0.2       0.0 mvma_10_8_1/dpth/mult_out_reg[15]/D
+    0:00:31    3817.1      0.01       0.2       0.0 mvma_10_8_1/ctrl/input_counter_reg[0]/D
+    0:00:31    3818.4      0.01       0.2       0.0 mvma_10_8_1/ctrl/input_counter_reg[0]/D
+    0:00:31    3818.4      0.01       0.2       0.0 mvma_10_8_1/dpth/mult_out_reg[15]/D
+    0:00:31    3818.7      0.01       0.2       0.0 mvma_10_8_1/dpth/mult_out_reg[15]/D
+    0:00:31    3820.0      0.01       0.2       0.0 mvma_10_8_1/ctrl/input_counter_reg[0]/D
+    0:00:31    3820.0      0.01       0.2       0.0                          
+    0:00:31    3799.8      0.03       0.3       0.0                          
+    0:00:31    3799.8      0.03       0.3       0.0                          
+    0:00:31    3799.8      0.03       0.3       0.0                          
+    0:00:31    3799.8      0.03       0.3       0.0                          
+    0:00:31    3799.8      0.03       0.3       0.0                          
+    0:00:31    3799.8      0.03       0.3       0.0                          
+    0:00:32    3800.9      0.01       0.2       0.0 mvma_10_8_1/ctrl/input_counter_reg[0]/D
+    0:00:32    3802.5      0.01       0.2       0.0 mvma_10_8_1/ctrl/input_counter_reg[2]/D
+    0:00:32    3802.5      0.01       0.2       0.0 mvma_10_8_1/ctrl/input_counter_reg[2]/D
+    0:00:32    3803.3      0.01       0.2       0.0 mvma_10_8_1/dpth/mult_out_reg[15]/D
+    0:00:32    3805.1      0.01       0.2       0.0 mvma_10_8_1/ctrl/input_counter_reg[0]/D
+    0:00:32    3805.1      0.01       0.2       0.0 mvma_10_8_1/ctrl/input_counter_reg[0]/D
+    0:00:32    3808.1      0.01       0.1       0.0 mvma_10_8_1/dpth/mult_out_reg[15]/D
+    0:00:32    3809.7      0.01       0.1       0.0 mvma_10_8_1/ctrl/input_counter_reg[0]/D
+    0:00:32    3809.7      0.01       0.1       0.0 mvma_10_8_1/ctrl/input_counter_reg[2]/D
+    0:00:32    3810.7      0.01       0.1       0.0 mvma_10_8_1/ctrl/input_counter_reg[2]/D
+    0:00:33    3809.9      0.01       0.1       0.0                          
+    0:00:33    3795.8      0.01       0.1       0.0                          
+    0:00:33    3783.8      0.01       0.1       0.0                          
+    0:00:33    3780.7      0.03       0.2       0.0                          
+    0:00:33    3780.7      0.03       0.2       0.0                          
+    0:00:33    3780.7      0.03       0.2       0.0                          
+    0:00:33    3780.7      0.03       0.2       0.0                          
+    0:00:33    3780.7      0.03       0.2       0.0                          
+    0:00:33    3780.7      0.03       0.2       0.0                          
+    0:00:33    3784.4      0.01       0.1       0.0 mvma_10_8_1/ctrl/input_counter_reg[0]/D
+    0:00:33    3784.4      0.01       0.1       0.0 mvma_10_8_1/ctrl/input_counter_reg[0]/D
+    0:00:33    3784.4      0.01       0.1       0.0 mvma_10_8_1/ctrl/input_counter_reg[0]/D
+    0:00:33    3785.7      0.01       0.1       0.0 mvma_10_8_1/ctrl/input_counter_reg[0]/D
+    0:00:33    3787.8      0.01       0.1       0.0 mvma_10_8_1/dpth/mult_out_reg[15]/D
+    0:00:33    3788.6      0.01       0.1       0.0 mvma_10_8_1/dpth/data_out_reg[0]/D
+    0:00:33    3790.0      0.01       0.1       0.0 mvma_10_8_1/dpth/mult_out_reg[15]/D
+    0:00:33    3790.0      0.01       0.1       0.0 mvma_10_8_1/dpth/mult_out_reg[15]/D
+    0:00:33    3791.0      0.01       0.1       0.0 mvma_10_8_1/ctrl/input_counter_reg[0]/D
+    0:00:34    3792.6      0.01       0.1       0.0 mvma_10_8_1/ctrl/input_counter_reg[0]/D
+    0:00:34    3793.4      0.01       0.1       0.0                          
+    0:00:34    3794.2      0.01       0.1       0.0                          
+    0:00:34    3794.2      0.01       0.1       0.0 mvma_10_8_1/dpth/mult_out_reg[15]/D
+    0:00:34    3795.0      0.01       0.1       0.0 mvma_10_8_1/ctrl/input_counter_reg[0]/D
+    0:00:34    3798.2      0.00       0.1       0.0                          
+Loading db file '/home/home4/pmilder/ese507/synthesis/lib/NangateOpenCellLibrary_typical.db'
+
+
+Note: Symbol # after min delay cost means estimated hold TNS across all active scenarios 
+
+
+  Optimization Complete
+  ---------------------
+1
+report_area
+ 
+****************************************
+Report : area
+Design : layer_10_8_1_16
+Version: J-2014.09-SP5-2
+Date   : Fri Dec  8 16:06:57 2017
+****************************************
+
+Information: Updating design information... (UID-85)
+Library(s) Used:
+
+    NangateOpenCellLibrary (File: /home/home4/pmilder/ese507/synthesis/lib/NangateOpenCellLibrary_typical.db)
+
+Number of ports:                           38
+Number of nets:                            57
+Number of cells:                           20
+Number of combinational cells:             18
+Number of sequential cells:                 1
+Number of macros/black boxes:               0
+Number of buf/inv:                          1
+Number of references:                       5
+
+Combinational area:               2603.341991
+Buf/Inv area:                      265.734000
+Noncombinational area:            1194.871957
+Macro/Black Box area:                0.000000
+Net Interconnect area:      undefined  (Wire load has zero net area)
+
+Total cell area:                  3798.213948
+Total area:                 undefined
+1
+report_power
+Loading db file '/home/home4/pmilder/ese507/synthesis/lib/NangateOpenCellLibrary_typical.db'
+Information: Propagating switching activity (low effort zero delay simulation). (PWR-6)
+Warning: Design has unannotated primary inputs. (PWR-414)
+Warning: Design has unannotated sequential cell outputs. (PWR-415)
+ 
+****************************************
+Report : power
+        -analysis_effort low
+Design : layer_10_8_1_16
+Version: J-2014.09-SP5-2
+Date   : Fri Dec  8 16:06:57 2017
+****************************************
+
+
+Library(s) Used:
+
+    NangateOpenCellLibrary (File: /home/home4/pmilder/ese507/synthesis/lib/NangateOpenCellLibrary_typical.db)
+
+
+Operating Conditions: typical   Library: NangateOpenCellLibrary
+Wire Load Model Mode: top
+
+Design        Wire Load Model            Library
+------------------------------------------------
+layer_10_8_1_16        5K_hvratio_1_1    NangateOpenCellLibrary
+
+
+Global Operating Voltage = 1.1  
+Power-specific unit information :
+    Voltage Units = 1V
+    Capacitance Units = 1.000000ff
+    Time Units = 1ns
+    Dynamic Power Units = 1uW    (derived from V,C,T units)
+    Leakage Power Units = 1nW
+
+
+  Cell Internal Power  =   1.0609 mW   (83%)
+  Net Switching Power  = 217.7775 uW   (17%)
+                         ---------
+Total Dynamic Power    =   1.2786 mW  (100%)
+
+Cell Leakage Power     =  83.9776 uW
+
+
+                 Internal         Switching           Leakage            Total
+Power Group      Power            Power               Power              Power   (   %    )  Attrs
+--------------------------------------------------------------------------------------------------
+io_pad             0.0000            0.0000            0.0000            0.0000  (   0.00%)
+memory             0.0000            0.0000            0.0000            0.0000  (   0.00%)
+black_box          0.0000            0.0000            0.0000            0.0000  (   0.00%)
+clock_network      0.0000            0.0000            0.0000            0.0000  (   0.00%)
+register         889.6600           28.3512        2.0713e+04          938.7248  (  68.89%)
+sequential         0.0000            0.0000            0.0000            0.0000  (   0.00%)
+combinational    171.2006          189.4261        6.3264e+04          423.8910  (  31.11%)
+--------------------------------------------------------------------------------------------------
+Total          1.0609e+03 uW       217.7773 uW     8.3978e+04 nW     1.3626e+03 uW
+1
+report_timing
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+Design : layer_10_8_1_16
+Version: J-2014.09-SP5-2
+Date   : Fri Dec  8 16:06:57 2017
+****************************************
+
+Operating Conditions: typical   Library: NangateOpenCellLibrary
+Wire Load Model Mode: top
+
+  Startpoint: mvma_10_8_1/ctrl/input_buffer_reg[9]
+              (rising edge-triggered flip-flop clocked by clk)
+  Endpoint: mvma_10_8_1/ctrl/input_counter_reg[0]
+            (rising edge-triggered flip-flop clocked by clk)
+  Path Group: clk
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  layer_10_8_1_16    5K_hvratio_1_1        NangateOpenCellLibrary
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock clk (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             0.00       0.00
+  mvma_10_8_1/ctrl/input_buffer_reg[9]/CK (DFF_X1)        0.00       0.00 r
+  mvma_10_8_1/ctrl/input_buffer_reg[9]/Q (DFF_X1)         0.11       0.11 r
+  mvma_10_8_1/ctrl/r380/a[9] (control_rank0_DW_div_uns_1)
+                                                          0.00       0.11 r
+  mvma_10_8_1/ctrl/r380/u_div/add_298_DP_OP_291_3505_7/I1[9] (control_rank0_add_298_DP_OP_291_3505_0)
+                                                          0.00       0.11 r
+  mvma_10_8_1/ctrl/r380/u_div/add_298_DP_OP_291_3505_7/U891/ZN (XNOR2_X1)
+                                                          0.07       0.18 r
+  mvma_10_8_1/ctrl/r380/u_div/add_298_DP_OP_291_3505_7/U1219/ZN (XNOR2_X1)
+                                                          0.06       0.24 r
+  mvma_10_8_1/ctrl/r380/u_div/add_298_DP_OP_291_3505_7/U1293/ZN (XNOR2_X1)
+                                                          0.06       0.30 r
+  mvma_10_8_1/ctrl/r380/u_div/add_298_DP_OP_291_3505_7/U1244/ZN (XNOR2_X1)
+                                                          0.06       0.37 r
+  mvma_10_8_1/ctrl/r380/u_div/add_298_DP_OP_291_3505_7/U804/Z (XOR2_X1)
+                                                          0.07       0.44 r
+  mvma_10_8_1/ctrl/r380/u_div/add_298_DP_OP_291_3505_7/U803/ZN (XNOR2_X1)
+                                                          0.06       0.50 r
+  mvma_10_8_1/ctrl/r380/u_div/add_298_DP_OP_291_3505_7/U958/ZN (XNOR2_X1)
+                                                          0.07       0.57 r
+  mvma_10_8_1/ctrl/r380/u_div/add_298_DP_OP_291_3505_7/U806/ZN (XNOR2_X1)
+                                                          0.06       0.64 r
+  mvma_10_8_1/ctrl/r380/u_div/add_298_DP_OP_291_3505_7/U1298/ZN (NAND2_X1)
+                                                          0.03       0.67 f
+  mvma_10_8_1/ctrl/r380/u_div/add_298_DP_OP_291_3505_7/U1338/ZN (NAND3_X1)
+                                                          0.03       0.69 r
+  mvma_10_8_1/ctrl/r380/u_div/add_298_DP_OP_291_3505_7/U966/ZN (NAND2_X1)
+                                                          0.03       0.72 f
+  mvma_10_8_1/ctrl/r380/u_div/add_298_DP_OP_291_3505_7/U834/ZN (AOI21_X1)
+                                                          0.06       0.78 r
+  mvma_10_8_1/ctrl/r380/u_div/add_298_DP_OP_291_3505_7/U1290/ZN (INV_X1)
+                                                          0.02       0.80 f
+  mvma_10_8_1/ctrl/r380/u_div/add_298_DP_OP_291_3505_7/U1322/ZN (NAND3_X1)
+                                                          0.03       0.83 r
+  mvma_10_8_1/ctrl/r380/u_div/add_298_DP_OP_291_3505_7/U935/ZN (AND2_X1)
+                                                          0.04       0.87 r
+  mvma_10_8_1/ctrl/r380/u_div/add_298_DP_OP_291_3505_7/U1303/ZN (AOI21_X1)
+                                                          0.03       0.90 f
+  mvma_10_8_1/ctrl/r380/u_div/add_298_DP_OP_291_3505_7/U951/ZN (XNOR2_X1)
+                                                          0.06       0.96 f
+  mvma_10_8_1/ctrl/r380/u_div/add_298_DP_OP_291_3505_7/O2[22] (control_rank0_add_298_DP_OP_291_3505_0)
+                                                          0.00       0.96 f
+  mvma_10_8_1/ctrl/r380/U6/ZN (XNOR2_X1)                  0.06       1.01 f
+  mvma_10_8_1/ctrl/r380/U9/ZN (XNOR2_X1)                  0.06       1.07 f
+  mvma_10_8_1/ctrl/r380/U14/ZN (XNOR2_X1)                 0.06       1.13 f
+  mvma_10_8_1/ctrl/r380/U13/ZN (XNOR2_X1)                 0.06       1.19 f
+  mvma_10_8_1/ctrl/r380/remainder[3] (control_rank0_DW_div_uns_1)
+                                                          0.00       1.19 f
+  mvma_10_8_1/ctrl/U35/ZN (OAI33_X1)                      0.07       1.25 r
+  mvma_10_8_1/ctrl/U161/ZN (OAI21_X1)                     0.04       1.29 f
+  mvma_10_8_1/ctrl/U204/ZN (INV_X1)                       0.04       1.33 r
+  mvma_10_8_1/ctrl/U205/ZN (OAI211_X1)                    0.04       1.38 f
+  mvma_10_8_1/ctrl/U55/ZN (AND2_X1)                       0.04       1.42 f
+  mvma_10_8_1/ctrl/U14/Z (MUX2_X1)                        0.07       1.49 f
+  mvma_10_8_1/ctrl/input_counter_reg[0]/D (DFF_X1)        0.01       1.49 f
+  data arrival time                                                  1.49
+
+  clock clk (rise edge)                                   1.53       1.53
+  clock network delay (ideal)                             0.00       1.53
+  mvma_10_8_1/ctrl/input_counter_reg[0]/CK (DFF_X1)       0.00       1.53 r
+  library setup time                                     -0.04       1.49
+  data required time                                                 1.49
+  --------------------------------------------------------------------------
+  data required time                                                 1.49
+  data arrival time                                                 -1.49
+  --------------------------------------------------------------------------
+  slack (VIOLATED: increase significant digits)                      0.00
+
+
+1
+write -f verilog $TOP_MOD_NAME -output gates.v -hierarchy
+Writing verilog file '/home/home5/rrubio/rrubio_ese507work/proj3/part1/gates.v'.
+Warning: Verilog 'assign' or 'tran' statements are written out. (VO-4)
+Warning: Verilog writer has added 33 nets to module control_rank0_DW_div_uns_1 using SYNOPSYS_UNCONNECTED_ as prefix.  Please use the change_names command to make the correct changes before invoking the verilog writer.  (VO-11)
+Warning: Verilog writer has added 16 nets to module datapath using SYNOPSYS_UNCONNECTED_ as prefix.  Please use the change_names command to make the correct changes before invoking the verilog writer.  (VO-11)
+1
+quit
+
+Thank you...
